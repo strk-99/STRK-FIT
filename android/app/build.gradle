@@ -1,0 +1,99 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.strkfit.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.strkfit.app"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+dependencies {
+    // Kotlin Standard Library
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:2.0.21"
+
+    // AndroidX Core Libraries - Use versions compatible with AGP 8.7.3 and compileSdk 35
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.activity:activity-ktx:1.9.3'
+
+    // Capacitor - USE LOCAL PROJECT, NOT MAVEN
+    implementation project(':capacitor-android')
+
+    // Splash Screen Support
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    // Material Design Components
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+
+    // WebView Support
+    implementation 'androidx.webkit:webkit:1.12.1'
+
+    // SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Testing Dependencies
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+}
+
+// Force specific versions to prevent auto-updates to incompatible versions
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.core:core:1.15.0'
+        force 'androidx.core:core-ktx:1.15.0'
+        force 'androidx.activity:activity:1.9.3'
+        force 'androidx.activity:activity-ktx:1.9.3'
+        force 'androidx.core:core-splashscreen:1.0.1'
+    }
+}
+
+// Apply Capacitor configuration
+apply from: 'capacitor.build.gradle'
+
+try {
+    def capacitorPropertiesFile = project.file('capacitor.build.gradle')
+    if (capacitorPropertiesFile.exists()) {
+        apply from: capacitorPropertiesFile
+    }
+} catch (Exception e) {
+    logger.warn("capacitor.build.gradle file not found, skipping")
+}
