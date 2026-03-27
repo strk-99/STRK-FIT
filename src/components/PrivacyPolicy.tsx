@@ -213,8 +213,8 @@ export function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
                             If you have questions about this Privacy Policy or wish to exercise your data rights, contact us at:
                         </p>
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800 mt-3">
-                            <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">strkfit@gmail.com</span></p>
-                            <p className="text-sm mt-1"><strong>Data Protection Officer:</strong> <span className="text-cyan-400">strkfit@gmail.com</span></p>
+                            <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
+                            <p className="text-sm mt-1"><strong>Data Protection Officer:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
                         </div>
                     </section>
 

@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useStore } from './store';
 import { App as CapacitorApp } from '@capacitor/app';
+import {
+  initializeNotificationChannel,
+  initializeNotifications,
+  setupNotificationListeners,
+  getNotificationSettings,
+  saveNotificationSettings,
+} from './lib/notifications';
 import { Layout } from './components/Layout';
 import { DailyCard } from './components/DailyCard';
 import { CalendarView } from './components/CalendarView';
@@ -12,9 +19,31 @@ import { DailyHistory } from './components/DailyHistory';
 import { WelcomeScreen } from './components/WelcomeScreen';
 
 export default function App() {
-  const { profile } = useStore();
+  const { profile, logs } = useStore();
   const [tab, setTab] = useState<'home' | 'calendar' | 'history' | 'review' | 'profile' | 'resources' | 'settings'>('home');
   const [showWelcome, setShowWelcome] = useState(true);
+
+  // Initialize notification channel and listeners once on mount
+  useEffect(() => {
+    initializeNotificationChannel();
+    setupNotificationListeners();
+  }, []);
+
+  // Schedule (or re-schedule) daily reminder whenever settings change.
+  // Also re-syncs localStorage (wiped on reinstall) from the persisted profile.
+  useEffect(() => {
+    if (!profile?.reminderEnabled) return;
+    const current = getNotificationSettings();
+    if (!current.enabled) {
+      saveNotificationSettings({
+        ...current,
+        enabled: true,
+        dailyReminder: true,
+        reminderTime: profile.reminderTime || '20:00',
+      });
+    }
+    initializeNotifications(Object.values(logs), 0);
+  }, [profile?.reminderEnabled, profile?.reminderTime, logs]);
 
   // Handle Android Back Button
   useEffect(() => {

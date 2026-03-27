@@ -47,10 +47,10 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                         Questions, feedback, or general inquiries
                                     </p>
                                     <a
-                                        href="mailto:strkfit@gmail.com"
+                                        href="mailto:pvsuryateja99@gmail.com"
                                         className="text-sm text-cyan-400 hover:text-cyan-300 font-semibold"
                                     >
-                                        strkfit@gmail.com
+                                        pvsuryateja99@gmail.com
                                     </a>
                                     <p className="text-xs text-slate-600 mt-2">
                                         Response time: 24-48 hours
@@ -71,10 +71,10 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                         Bug reports, technical issues, app crashes
                                     </p>
                                     <a
-                                        href="mailto:strkfit@gmail.com"
+                                        href="mailto:pvsuryateja99@gmail.com"
                                         className="text-sm text-red-400 hover:text-red-300 font-semibold"
                                     >
-                                        strkfit@gmail.com
+                                        pvsuryateja99@gmail.com
                                     </a>
                                     <p className="text-xs text-slate-600 mt-2">
                                         Response time: 12-24 hours
@@ -95,10 +95,10 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                         Data deletion, privacy concerns, GDPR requests
                                     </p>
                                     <a
-                                        href="mailto:strkfit@gmail.com"
+                                        href="mailto:pvsuryateja99@gmail.com"
                                         className="text-sm text-emerald-400 hover:text-emerald-300 font-semibold"
                                     >
-                                        strkfit@gmail.com
+                                        pvsuryateja99@gmail.com
                                     </a>
                                     <p className="text-xs text-slate-600 mt-2">
                                         Response time: 48 hours
@@ -119,10 +119,10 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                         Feature requests, suggestions, improvements
                                     </p>
                                     <a
-                                        href="mailto:strkfit@gmail.com"
+                                        href="mailto:pvsuryateja99@gmail.com"
                                         className="text-sm text-violet-400 hover:text-violet-300 font-semibold"
                                     >
-                                        strkfit@gmail.com
+                                        pvsuryateja99@gmail.com
                                     </a>
                                     <p className="text-xs text-slate-600 mt-2">
                                         We read every submission!
@@ -173,7 +173,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
-                                    Go to Profile → Data Options → Reset Application. Or email strkfit@gmail.com
+                                    Go to Profile → Data Options → Reset Application. Or email pvsuryateja99@gmail.com
                                     with your deletion request. See our Data Deletion Policy for more details.
                                 </p>
                             </details>
@@ -218,7 +218,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
                                 <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
-                                    Email strkfit@gmail.com with detailed information about the bug, including
+                                    Email pvsuryateja99@gmail.com with detailed information about the bug, including
                                     screenshots and steps to reproduce. We prioritize bug fixes and will respond quickly.
                                 </p>
                             </details>

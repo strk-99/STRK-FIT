@@ -81,21 +81,31 @@ export async function requestNotificationPermission(): Promise<boolean> {
 }
 
 /**
+ * Create the default notification channel (Android 8+).
+ * Call once at app startup — safe to call multiple times (no-op if exists).
+ */
+export async function initializeNotificationChannel(): Promise<void> {
+    if (!Capacitor.isNativePlatform()) return;
+    try {
+        await LocalNotifications.createChannel({
+            id: 'default',
+            name: 'General Notifications',
+            description: 'General notifications for STRK-FIT',
+            importance: 3,
+            visibility: 1,
+            vibration: true,
+        });
+    } catch (e) {
+        console.warn('Notification channel creation failed:', e);
+    }
+}
+
+/**
  * Show an immediate notification
  */
 export async function showNotification(title: string, options?: NotificationOptions & { id?: number, body?: string }): Promise<void> {
     if (Capacitor.isNativePlatform()) {
         try {
-            // Create channel first (required for Android 8+)
-            await LocalNotifications.createChannel({
-                id: 'default',
-                name: 'General Notifications',
-                description: 'General notifications for STRK-FIT',
-                importance: 3,
-                visibility: 1,
-                vibration: true,
-            });
-
             await LocalNotifications.schedule({
                 notifications: [{
                     title: title,
@@ -210,7 +220,7 @@ export async function scheduleDailyReminder(
                     title: "STRK-FIT Reminder",
                     body: "Don't break your streak! Log your progress for today.",
                     id: notificationId,
-                    schedule: { at: reminderDate, allowWhileIdle: true },
+                    schedule: { at: reminderDate, allowWhileIdle: true, every: 'day' },
                     channelId: 'default',
                     sound: undefined,
                     attachments: undefined,
@@ -286,8 +296,7 @@ export async function scheduleMonthlyReminder(): Promise<number | null> {
                     schedule: {
                         at: nextMonth,
                         allowWhileIdle: true,
-                        every: 'month', // Native recurrence
-                        count: 12 // Repeat for a year? or indefinitely if valid. 'every' usually handles it.
+                        every: 'month',
                     },
                     channelId: 'default'
                 }]

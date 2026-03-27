@@ -150,7 +150,7 @@ export function TermsAndConditions({ onClose }: TermsAndConditionsProps) {
                             If you have any questions about these Terms & Conditions, please contact us at:
                         </p>
                         <p className="text-sm text-cyan-400 mt-2">
-                            strkfit@gmail.com
+                            pvsuryateja99@gmail.com
                         </p>
                     </section>
 

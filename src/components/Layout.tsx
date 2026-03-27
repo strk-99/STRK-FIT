@@ -14,7 +14,7 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
         <div className="h-screen bg-slate-950 flex justify-center text-slate-200 overflow-hidden">
             <div className="w-full max-w-md bg-slate-950 h-screen relative flex flex-col shadow-2xl shadow-cyan-900/10 border-x border-slate-900">
                 {/* App Header */}
-                <header className="flex-shrink-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg shadow-cyan-900/20">
+                <header className="flex-shrink-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg shadow-cyan-900/20" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
                     <div className="px-4 pt-4 pb-0 flex items-center justify-center relative overflow-hidden">
                         {/* Animated gradient background */}
                         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-emerald-500/5 to-cyan-500/5 animate-pulse"></div>
@@ -34,12 +34,12 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
                 </header>
 
                 {/* Content Area - Scrollable */}
-                <main className="flex-1 overflow-y-auto overflow-x-hidden pb-24">
+                <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))' }}>
                     {children}
                 </main>
 
                 {/* Bottom Navigation */}
-                <div className="fixed bottom-0 w-full max-w-md bg-slate-950/90 backdrop-blur-md border-t border-slate-800 px-2 py-4 flex justify-between z-40">
+                <div className="fixed bottom-0 w-full max-w-md bg-slate-950/90 backdrop-blur-md border-t border-slate-800 px-2 pt-4 flex justify-between z-40" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
                     <button
                         onClick={() => onTabChange('home')}
                         className={cn("flex-1 flex flex-col items-center gap-1 transition-all", currentTab === 'home' ? "text-cyan-400" : "text-slate-600 hover:text-slate-400")}

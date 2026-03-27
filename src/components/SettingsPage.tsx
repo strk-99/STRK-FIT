@@ -38,10 +38,8 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
             // Request permission if turning on
             const granted = await requestNotificationPermission();
             if (!granted) {
-                alert('Notifications are simulated in this offline demo, but permission was denied by browser.');
-                // We typically wouldn't enable it if denied, but for this demo/offline app we can behave softly
-                // Update: actually better to respect the boolean.
-                // return; 
+                alert('Please enable notifications for STRK-FIT in your device Settings.');
+                return;
             }
         }
 

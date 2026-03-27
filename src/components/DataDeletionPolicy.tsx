@@ -99,7 +99,7 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800">
                             <p className="text-sm mb-2">Send an email to our Data Protection Team:</p>
                             <div className="bg-slate-900 p-3 rounded-lg border border-slate-800">
-                                <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">strkfit@gmail.com</span></p>
+                                <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
                                 <p className="text-sm mt-1"><strong>Subject:</strong> Data Deletion Request</p>
                             </div>
                             <p className="text-xs text-slate-500 mt-3">
@@ -213,11 +213,11 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         </p>
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800">
                             <p className="text-sm"><strong>Data Protection Officer:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">strkfit@gmail.com</p>
+                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
                             <p className="text-sm mt-3"><strong>Privacy Team:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">strkfit@gmail.com</p>
+                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
                             <p className="text-sm mt-3"><strong>Support Team:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">strkfit@gmail.com</p>
+                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
                         </div>
                     </section>
 
