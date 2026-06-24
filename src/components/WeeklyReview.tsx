@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useStore } from '../store';
+import { useStore, type MoodType } from '../store';
 import {
     startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfQuarter, endOfQuarter,
     eachDayOfInterval, format, addDays, subDays, addWeeks, subWeeks, addMonths, subMonths,
@@ -7,16 +7,28 @@ import {
 } from 'date-fns';
 import {
     Trophy, ChevronLeft, ChevronRight, Flame,
-    Award, Crown, Sparkles, Moon, Scale, Utensils
+    Award, Crown, Sparkles, Moon, Scale, Utensils, CheckCircle2, X
 } from 'lucide-react';
 import { cn } from '../lib/utils';
+
+const MOOD_META: Record<MoodType, { emoji: string; label: string; color: string }> = {
+    dead:  { emoji: '💀', label: 'Dead',  color: 'text-slate-400'  },
+    low:   { emoji: '😴', label: 'Low',   color: 'text-blue-400'   },
+    okay:  { emoji: '😐', label: 'Okay',  color: 'text-yellow-400' },
+    good:  { emoji: '💪', label: 'Good',  color: 'text-emerald-400'},
+    fired: { emoji: '🔥', label: 'Fired', color: 'text-orange-400' },
+};
 
 type PeriodType = 'daily' | 'weekly' | 'monthly' | 'quarterly' | 'half-yearly' | 'yearly';
 
 export function WeeklyReview() {
-    const { logs, weightHistory, profile } = useStore();
+    const { logs, weightHistory, profile, weeklyIntentions, setWeeklyIntention, setWeeklyAchieved } = useStore();
     const [period, setPeriod] = useState<PeriodType>('weekly');
     const [viewDate, setViewDate] = useState(new Date());
+    const [intentionInput, setIntentionInput] = useState('');
+
+    const weekKey = format(startOfWeek(viewDate, { weekStartsOn: 1 }), 'yyyy-MM-dd');
+    const weekIntention = weeklyIntentions[weekKey];
 
     const stats = useMemo(() => {
         let start: Date, end: Date;
@@ -63,6 +75,7 @@ export function WeeklyReview() {
         let highProteinDays = 0;
         let exerciseCount = 0;
         let foodEntries = 0;
+        const moodCounts: Record<MoodType, number> = { dead: 0, low: 0, okay: 0, good: 0, fired: 0 };
 
         days.forEach(day => {
             const dKey = format(day, 'yyyy-MM-dd');
@@ -75,6 +88,7 @@ export function WeeklyReview() {
                 if (log.proteinEst === 'high') highProteinDays++;
                 exerciseCount += log.exercises?.length || 0;
                 foodEntries += log.foodLog?.length || 0;
+                if (log.mood) moodCounts[log.mood]++;
             }
         });
 
@@ -167,7 +181,8 @@ export function WeeklyReview() {
             title,
             message,
             emoji,
-            score: Math.round(score)
+            score: Math.round(score),
+            moodCounts,
         };
     }, [logs, weightHistory, viewDate, period, profile]);
 
@@ -298,6 +313,56 @@ export function WeeklyReview() {
                 </button>
             </div>
 
+            {/* Weekly Intention (only in weekly mode) */}
+            {period === 'weekly' && (
+                <div className="bg-slate-900/40 border border-amber-800/30 rounded-xl p-4 space-y-3">
+                    <p className="text-[10px] text-amber-500/70 uppercase font-bold tracking-wider">Weekly Intention</p>
+                    {weekIntention?.intention ? (
+                        <div className="space-y-3">
+                            <div className="flex items-start justify-between gap-2">
+                                <p className="text-sm text-slate-300 italic flex-1">"{weekIntention.intention}"</p>
+                                <button onClick={() => setWeeklyIntention(weekKey, '')}
+                                    className="text-slate-600 hover:text-slate-400 transition-colors flex-shrink-0 mt-0.5">
+                                    <X className="w-3.5 h-3.5" />
+                                </button>
+                            </div>
+                            <div className="flex gap-2">
+                                <p className="text-xs text-slate-500">Did you achieve it?</p>
+                                <button
+                                    onClick={() => setWeeklyAchieved(weekKey, true)}
+                                    className={cn('text-xs font-bold px-2 py-0.5 rounded transition-colors', weekIntention.achieved === true ? 'text-emerald-400 bg-emerald-950/40' : 'text-slate-500 hover:text-emerald-400')}>
+                                    Yes ✅
+                                </button>
+                                <button
+                                    onClick={() => setWeeklyAchieved(weekKey, false)}
+                                    className={cn('text-xs font-bold px-2 py-0.5 rounded transition-colors', weekIntention.achieved === false ? 'text-red-400 bg-red-950/40' : 'text-slate-500 hover:text-red-400')}>
+                                    Not yet
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <input
+                            value={intentionInput}
+                            onChange={e => setIntentionInput(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter' && intentionInput.trim()) {
+                                    setWeeklyIntention(weekKey, intentionInput.trim());
+                                    setIntentionInput('');
+                                }
+                            }}
+                            onBlur={() => {
+                                if (intentionInput.trim()) {
+                                    setWeeklyIntention(weekKey, intentionInput.trim());
+                                    setIntentionInput('');
+                                }
+                            }}
+                            placeholder="Set your intention for this week…"
+                            className="w-full bg-transparent text-sm text-slate-300 placeholder:text-slate-600 focus:outline-none border-b border-slate-800 pb-1"
+                        />
+                    )}
+                </div>
+            )}
+
             {/* Grade Card */}
             <div className={cn(
                 "relative p-8 rounded-2xl border-2 overflow-hidden bg-gradient-to-br shadow-2xl",
@@ -421,6 +486,22 @@ export function WeeklyReview() {
                 </div>
 
             </div>
+
+            {/* Mood Breakdown */}
+            {Object.values(stats.moodCounts).some(v => v > 0) && (
+                <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
+                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">Mood Breakdown</p>
+                    <div className="grid grid-cols-5 gap-2">
+                        {(Object.entries(stats.moodCounts) as [MoodType, number][]).map(([mood, count]) => (
+                            <div key={mood} className="flex flex-col items-center gap-1">
+                                <span className="text-xl">{MOOD_META[mood].emoji}</span>
+                                <span className={cn('text-lg font-bold', count > 0 ? MOOD_META[mood].color : 'text-slate-700')}>{count}</span>
+                                <span className="text-[9px] text-slate-600 font-bold uppercase">{MOOD_META[mood].label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* Motivational footer */}
             <div className="text-center pt-4">

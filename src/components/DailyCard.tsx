@@ -347,18 +347,18 @@ export function DailyCard() {
                 </div>
             </div>
 
-            {/* 5. NOTES SECTION */}
+            {/* 5. DAILY JOURNAL SECTION */}
             <div className="space-y-3 pt-4 border-t border-slate-800/50">
                 <div className="flex items-center gap-2 text-violet-400">
                     <StickyNote className="w-5 h-5" />
-                    <h2 className="font-bold uppercase tracking-wider text-sm">Daily Notes</h2>
+                    <h2 className="font-bold uppercase tracking-wider text-sm">Daily Journal</h2>
                 </div>
 
                 <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-3">
                     <textarea
-                        value={log?.notes || ''}
-                        onChange={(e) => logDay(dateStr, { notes: e.target.value })}
-                        placeholder="How was your workout? How are you feeling?"
+                        value={log?.dailyJournal || ''}
+                        onChange={(e) => logDay(dateStr, { dailyJournal: e.target.value })}
+                        placeholder="How was your day? How are you feeling?"
                         className="w-full bg-transparent text-sm text-slate-300 placeholder:text-slate-600 focus:outline-none min-h-[100px] resize-none"
                     />
                 </div>

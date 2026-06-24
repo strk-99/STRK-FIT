@@ -102,17 +102,17 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
     return (
         <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col">
             {/* Header */}
-            <div className="bg-slate-900/50 backdrop-blur-xl border-b border-slate-800 flex-shrink-0">
+            <div className="bg-white/[0.05] backdrop-blur-xl border-b border-white/10 flex-shrink-0">
                 <div className="flex items-center gap-4 p-4">
                     <button
                         onClick={onBack}
-                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                        className="p-2 hover:bg-white/10 rounded-lg transition-colors"
                     >
-                        <ArrowLeft className="w-6 h-6 text-slate-400" />
+                        <ArrowLeft className="w-6 h-6 text-white/50" />
                     </button>
                     <div>
                         <h1 className="text-2xl font-bold text-white">Settings</h1>
-                        <p className="text-sm text-slate-400">Manage your preferences</p>
+                        <p className="text-sm text-white/50">Manage your preferences</p>
                     </div>
                 </div>
             </div>
@@ -122,12 +122,12 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                 <div className="p-4 space-y-6 max-w-2xl mx-auto pb-8">
                     {/* Monthly Email Reports Section */}
                     <div className="space-y-3">
-                        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                        <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider">
                             Email Reports
                         </h3>
                         <button
                             onClick={handleToggleMonthlyReports}
-                            className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 transition-colors"
+                            className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 transition-colors"
                         >
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center">
@@ -135,7 +135,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                                 </div>
                                 <div className="text-left">
                                     <p className="text-sm font-medium text-white">Monthly Progress Reports</p>
-                                    <p className="text-xs text-slate-400">CSV reports sent monthly</p>
+                                    <p className="text-xs text-white/50">CSV reports sent monthly</p>
                                 </div>
                             </div>
                             <div className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${monthlyReportsEnabled ? 'bg-emerald-500' : 'bg-slate-700'
@@ -149,26 +149,26 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                     </div>
 
                     {/* Divider */}
-                    <div className="border-t border-slate-800" />
+                    <div className="border-t border-white/10" />
 
                     {/* Notification Settings */}
                     <div className="space-y-3">
-                        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                        <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider">
                             Notifications
                         </h3>
 
                         {/* Streak Reminders Toggle */}
                         <button
                             onClick={handleToggleNotifications}
-                            className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 transition-colors"
+                            className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 transition-colors"
                         >
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                                    <Bell className="w-5 h-5 text-cyan-400" />
+                                <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                                    <Bell className="w-5 h-5 text-white" />
                                 </div>
                                 <div className="text-left">
                                     <p className="text-sm font-medium text-white">Streak Reminders</p>
-                                    <p className="text-xs text-slate-400">Get reminded to log daily</p>
+                                    <p className="text-xs text-white/50">Get reminded to log daily</p>
                                 </div>
                             </div>
                             <div className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${profile?.reminderEnabled ? 'bg-cyan-500' : 'bg-slate-700'
@@ -182,32 +182,32 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
 
                         {/* Reminder Frequency/Time (Conditional) */}
                         {profile?.reminderEnabled && (
-                            <div className="flex items-center justify-between p-4 rounded-lg bg-slate-900 border border-slate-800/50 animate-fade-in">
+                            <div className="flex items-center justify-between p-4 rounded-lg bg-white/[0.06] border border-white/[0.08] animate-fade-in">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-slate-800 rounded-lg">
-                                        <Clock className="w-4 h-4 text-slate-400" />
+                                    <div className="p-2 bg-white/10 rounded-lg">
+                                        <Clock className="w-4 h-4 text-white/50" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-slate-200">Daily Reminder Time</p>
-                                        <p className="text-xs text-slate-500">When should we check in?</p>
+                                        <p className="text-sm font-medium text-white/90">Daily Reminder Time</p>
+                                        <p className="text-xs text-white/35">When should we check in?</p>
                                     </div>
                                 </div>
                                 <input
                                     type="time"
                                     value={profile.reminderTime || '20:00'}
                                     onChange={handleTimeChange}
-                                    className="bg-slate-950 border border-slate-700 text-white text-sm rounded-lg px-3 py-2 focus:border-cyan-500 focus:outline-none"
+                                    className="bg-black border border-white/[0.15] text-white text-sm rounded-lg px-3 py-2 focus:border-white/30 focus:outline-none"
                                 />
                             </div>
                         )}
                     </div>
 
                     {/* Divider */}
-                    <div className="border-t border-slate-800" />
+                    <div className="border-t border-white/10" />
 
                     {/* Legal & Support Section */}
                     <div className="space-y-4">
-                        <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                        <h3 className="text-sm font-semibold text-white/50 uppercase tracking-wider">
                             Legal & Support
                         </h3>
 
@@ -215,7 +215,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                             {/* Privacy Policy */}
                             <button
                                 onClick={() => setShowPrivacy(true)}
-                                className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 hover:border-violet-500/50 transition-all"
+                                className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 hover:border-violet-500/50 transition-all"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center">
@@ -223,7 +223,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                                     </div>
                                     <div className="text-left">
                                         <p className="text-sm font-medium text-white">Privacy Policy</p>
-                                        <p className="text-xs text-slate-400">Data protection & privacy</p>
+                                        <p className="text-xs text-white/50">Data protection & privacy</p>
                                     </div>
                                 </div>
                                 <div className="text-xs text-violet-400">
@@ -234,18 +234,18 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                             {/* Terms & Conditions */}
                             <button
                                 onClick={() => setShowTerms(true)}
-                                className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all"
+                                className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 hover:border-white/40 transition-all"
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                                        <FileText className="w-5 h-5 text-cyan-400" />
+                                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                                        <FileText className="w-5 h-5 text-white" />
                                     </div>
                                     <div className="text-left">
                                         <p className="text-sm font-medium text-white">Terms & Conditions</p>
-                                        <p className="text-xs text-slate-400">Usage terms & agreements</p>
+                                        <p className="text-xs text-white/50">Usage terms & agreements</p>
                                     </div>
                                 </div>
-                                <div className="text-xs text-cyan-400">
+                                <div className="text-xs text-white">
                                     View →
                                 </div>
                             </button>
@@ -253,7 +253,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                             {/* Data Deletion */}
                             <button
                                 onClick={() => setShowDataDeletion(true)}
-                                className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 hover:border-red-500/50 transition-all"
+                                className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 hover:border-red-500/50 transition-all"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
@@ -261,7 +261,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                                     </div>
                                     <div className="text-left">
                                         <p className="text-sm font-medium text-white">Data Deletion Policy</p>
-                                        <p className="text-xs text-slate-400">Account & data removal</p>
+                                        <p className="text-xs text-white/50">Account & data removal</p>
                                     </div>
                                 </div>
                                 <div className="text-xs text-red-400">
@@ -272,7 +272,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                             {/* Health Disclaimer */}
                             <button
                                 onClick={() => setShowHealthDisclaimer(true)}
-                                className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 hover:border-emerald-500/50 transition-all"
+                                className="w-full flex items-center justify-between p-4 rounded-lg bg-white/[0.07] border border-white/[0.15] hover:bg-white/10 hover:border-emerald-500/50 transition-all"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
@@ -280,7 +280,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                                     </div>
                                     <div className="text-left">
                                         <p className="text-sm font-medium text-white">Health Disclaimer</p>
-                                        <p className="text-xs text-slate-400">Medical & fitness notices</p>
+                                        <p className="text-xs text-white/50">Medical & fitness notices</p>
                                     </div>
                                 </div>
                                 <div className="text-xs text-emerald-400">
@@ -291,18 +291,18 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                             {/* Support Contact */}
                             <button
                                 onClick={() => setShowSupport(true)}
-                                className="w-full flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-slate-800 to-slate-800/50 border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 transition-all"
+                                className="w-full flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-slate-800 to-slate-800/50 border border-white/[0.15] hover:bg-white/10 hover:border-white/40 transition-all"
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center">
-                                        <HelpCircle className="w-5 h-5 text-cyan-400" />
+                                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] flex items-center justify-center">
+                                        <HelpCircle className="w-5 h-5 text-white" />
                                     </div>
                                     <div className="text-left">
                                         <p className="text-sm font-medium text-white">Contact Support</p>
-                                        <p className="text-xs text-slate-400">Get help & report issues</p>
+                                        <p className="text-xs text-white/50">Get help & report issues</p>
                                     </div>
                                 </div>
-                                <div className="text-xs text-cyan-400">
+                                <div className="text-xs text-white">
                                     Open →
                                 </div>
                             </button>
