@@ -518,8 +518,8 @@ export function PlannerPage() {
             {/* ── Edit Modal ─────────────────────────────────────────── */}
             {editingTask && (
                 <>
-                    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40" onClick={() => setEditingTask(null)} />
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-700 rounded-t-2xl max-h-[90vh] overflow-y-auto"
+                    <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-[60]" onClick={() => setEditingTask(null)} />
+                    <div className="fixed bottom-0 left-0 right-0 z-[70] bg-slate-900 border-t border-slate-700 rounded-t-2xl max-h-[90vh] overflow-y-auto"
                         style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}>
                         <div className="flex justify-center pt-3 pb-1">
                             <div className="w-10 h-1 bg-slate-700 rounded-full" />

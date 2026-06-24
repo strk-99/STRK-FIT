@@ -79,11 +79,13 @@ export function TaskList() {
 
         addTask(dateStr, {
             title: taskTitle,
-            description: taskDescription || undefined,
+            notes: taskDescription || undefined,
             priority: selectedPriority,
             completed: false,
             reminderEnabled: !!reminderTime,
-            reminderTime: reminderTime || undefined
+            reminderTime: reminderTime || undefined,
+            reminderRepeat: 'none',
+            reminderDays: [],
         });
 
         // Reset form
@@ -264,11 +266,11 @@ export function TaskList() {
                                                         {task.title}
                                                     </h3>
                                                 </div>
-                                                {task.description && (
+                                                {task.notes && (
                                                     <p className={`text-xs mt-1 ${
                                                         task.completed ? 'text-slate-600' : 'text-slate-400'
                                                     }`}>
-                                                        {task.description}
+                                                        {task.notes}
                                                     </p>
                                                 )}
 

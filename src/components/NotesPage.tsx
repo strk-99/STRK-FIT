@@ -127,8 +127,8 @@ export function NotesPage() {
 
                 {confirmDelete && (
                     <>
-                        <div className="fixed inset-0 bg-black/70 z-40" onClick={() => setConfirmDelete(null)} />
-                        <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-700 rounded-t-2xl p-6 space-y-4"
+                        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-[60]" onClick={() => setConfirmDelete(null)} />
+                        <div className="fixed bottom-0 left-0 right-0 z-[70] bg-slate-900 border-t border-slate-700 rounded-t-2xl p-6 space-y-4"
                             style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}>
                             <p className="text-white font-bold text-center">Delete this note?</p>
                             <p className="text-slate-400 text-sm text-center">This cannot be undone.</p>
@@ -279,8 +279,8 @@ export function NotesPage() {
             {/* multi-delete confirm */}
             {confirmMultiDelete && (
                 <>
-                    <div className="fixed inset-0 bg-black/70 z-40" onClick={() => setConfirmMultiDelete(false)} />
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900 border-t border-slate-700 rounded-t-2xl p-6 space-y-4"
+                    <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-[60]" onClick={() => setConfirmMultiDelete(false)} />
+                    <div className="fixed bottom-0 left-0 right-0 z-[70] bg-slate-900 border-t border-slate-700 rounded-t-2xl p-6 space-y-4"
                         style={{ paddingBottom: 'calc(1.5rem + env(safe-area-inset-bottom))' }}>
                         <p className="text-white font-bold text-center">
                             Delete {selected.size} {selected.size === 1 ? 'note' : 'notes'}?
