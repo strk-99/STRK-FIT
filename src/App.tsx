@@ -18,9 +18,11 @@ import { ResourceHub } from './components/ResourceHub';
 import { DailyHistory } from './components/DailyHistory';
 import { WelcomeScreen } from './components/WelcomeScreen';
 
+type TabType = 'home' | 'notes' | 'history' | 'review' | 'profile' | 'resources' | 'settings';
+
 export default function App() {
   const { profile, logs } = useStore();
-  const [tab, setTab] = useState<'home' | 'notes' | 'history' | 'review' | 'profile' | 'resources' | 'settings'>('home');
+  const [tab, setTab] = useState<TabType>('home');
   const [showWelcome, setShowWelcome] = useState(true);
 
   // Initialize notification channel and listeners once on mount
@@ -30,7 +32,6 @@ export default function App() {
   }, []);
 
   // Schedule (or re-schedule) daily reminder whenever settings change.
-  // Also re-syncs localStorage (wiped on reinstall) from the persisted profile.
   useEffect(() => {
     if (!profile?.reminderEnabled) return;
     const current = getNotificationSettings();
@@ -45,57 +46,58 @@ export default function App() {
     initializeNotifications(Object.values(logs), 0);
   }, [profile?.reminderEnabled, profile?.reminderTime, logs]);
 
-  // Handle Android Back Button
+  // Sync tab changes with browser history so back button steps through tabs
   useEffect(() => {
-    const backHandler = CapacitorApp.addListener(
-      'backButton',
-      ({ canGoBack }) => {
-        if (canGoBack) {
-          window.history.back();
-        } else {
-          CapacitorApp.exitApp(); // app close
-        }
-      }
-    );
+    history.replaceState({ tab: 'home' }, '');
 
-    return () => {
-      backHandler.then(h => h.remove());
+    const onPopState = (e: PopStateEvent) => {
+      setTab((e.state?.tab as TabType) ?? 'home');
     };
+
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  const handleWelcomeComplete = () => {
-    setShowWelcome(false);
+  // Handle Android Back Button (Capacitor native)
+  useEffect(() => {
+    const backHandler = CapacitorApp.addListener('backButton', () => {
+      if (!window.history.state?.tab || window.history.state.tab === 'home') {
+        CapacitorApp.exitApp();
+      } else {
+        window.history.back();
+      }
+    });
+    return () => { backHandler.then(h => h.remove()); };
+  }, []);
+
+  const handleTabChange = (newTab: TabType) => {
+    if (newTab !== tab) {
+      history.pushState({ tab: newTab }, '');
+    }
+    setTab(newTab);
   };
 
-  // Show welcome screen on first launch
   if (showWelcome) {
-    return <WelcomeScreen onComplete={handleWelcomeComplete} />;
+    return <WelcomeScreen onComplete={() => setShowWelcome(false)} />;
   }
 
-
-
-  // Show settings page within layout
-  // (No longer full screen - integrated with sidebar navigation)
-
-  // If no profile exists, show profile page to set up
   if (!profile) {
     return (
-      <Layout currentTab="profile" onTabChange={setTab}>
-        <UserProfile onOpenSettings={() => setTab('settings')} />
+      <Layout currentTab="profile" onTabChange={handleTabChange}>
+        <UserProfile onOpenSettings={() => handleTabChange('settings')} />
       </Layout>
     );
   }
 
-  // Show main app
   return (
-    <Layout currentTab={tab} onTabChange={setTab}>
+    <Layout currentTab={tab} onTabChange={handleTabChange}>
       {tab === 'home'      && <TodayPage />}
       {tab === 'notes'     && <NotesPage />}
       {tab === 'history'   && <DailyHistory />}
       {tab === 'review'    && <WeeklyReview />}
-      {tab === 'profile'   && <UserProfile onOpenSettings={() => setTab('settings')} />}
+      {tab === 'profile'   && <UserProfile onOpenSettings={() => handleTabChange('settings')} />}
       {tab === 'resources' && <ResourceHub />}
-      {tab === 'settings'  && <SettingsPage onBack={() => setTab('profile')} />}
+      {tab === 'settings'  && <SettingsPage onBack={() => handleTabChange('profile')} />}
     </Layout>
   );
 }
