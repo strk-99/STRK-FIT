@@ -180,7 +180,7 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
 
                 {/* ── Content area ── */}
                 <main
-                    className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide relative z-10"
+                    className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide"
                     style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}
                 >
                     <div key={currentTab} className="animate-fade-in">

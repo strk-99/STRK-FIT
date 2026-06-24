@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import logo from '../assets/logo.png';
 
 interface WelcomeScreenProps {
     onComplete: () => void;
@@ -49,7 +50,7 @@ export function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
                         {/* Logo */}
                         <div className="flex justify-center py-2 animate-float">
                             <img
-                                src="/logo.png"
+                                src={logo}
                                 alt="STRK-FIT"
                                 className="h-32 w-auto object-contain scale-[2.0] drop-shadow-[0_0_25px_rgba(6,182,212,0.5)]"
                             />
