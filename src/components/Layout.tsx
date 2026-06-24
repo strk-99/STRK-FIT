@@ -183,17 +183,9 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
                     className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide relative z-10"
                     style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}
                 >
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={currentTab}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.18 }}
-                        >
-                            {children}
-                        </motion.div>
-                    </AnimatePresence>
+                    <div key={currentTab} className="animate-fade-in">
+                        {children}
+                    </div>
                 </main>
 
                 {/* ── Bottom navigation ── */}
