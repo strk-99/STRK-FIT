@@ -167,7 +167,7 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
                 {/* ── Content area ── */}
                 <main
                     className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide relative z-10"
-                    style={{ paddingBottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
+                    style={{ paddingBottom: 'calc(7rem + env(safe-area-inset-bottom))' }}
                 >
                     <AnimatePresence mode="wait">
                         <motion.div
@@ -184,10 +184,10 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
 
                 {/* ── Bottom navigation ── */}
                 <div
-                    className="absolute bottom-0 left-0 right-0 z-40 glass-nav border-t"
-                    style={{ paddingBottom: 'calc(0.6rem + env(safe-area-inset-bottom))' }}
+                    className="fixed bottom-0 left-0 right-0 z-40 glass-nav border-t"
+                    style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}
                 >
-                    <div className="flex justify-around items-end pt-2 px-2">
+                    <div className="max-w-md mx-auto flex justify-around items-end pt-2 px-2">
                         {BOTTOM_TABS.map(({ id, icon: Icon, label }) => {
                             const active = currentTab === id;
                             return (
