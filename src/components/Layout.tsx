@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, BookOpen, History, FileText, Menu, X, BarChart2 } from 'lucide-react';
+import { Home, User, BookOpen, History, FileText, Menu, X, BarChart2, RefreshCw } from 'lucide-react';
 import { cn } from '../lib/utils';
 import logo from '../assets/logo.png';
 
@@ -159,6 +159,20 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
                                         </motion.button>
                                     );
                                 })}
+
+                                {/* Reload button at bottom of sidebar */}
+                                <div className="pt-3 mt-3 border-t border-white/[0.07]">
+                                    <motion.button
+                                        whileTap={{ scale: 0.97 }}
+                                        onClick={() => window.location.reload()}
+                                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-500 hover:bg-white/[0.04] hover:text-slate-300 transition-all"
+                                    >
+                                        <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/[0.04] flex-shrink-0">
+                                            <RefreshCw className="w-4 h-4" />
+                                        </div>
+                                        <span className="font-semibold text-sm">Reload App</span>
+                                    </motion.button>
+                                </div>
                             </nav>
                         </motion.aside>
                     )}
