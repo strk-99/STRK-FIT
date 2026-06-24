@@ -80,7 +80,7 @@ function ReminderFields({ form, setForm }: { form: FormState; setForm: (f: FormS
             </label>
             <input type="time" value={form.reminderTime}
                 onChange={e => setForm({ ...form, reminderTime: e.target.value, reminderEnabled: !!e.target.value })}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors"
             />
             {form.reminderTime && (
                 <>
@@ -90,7 +90,7 @@ function ReminderFields({ form, setForm }: { form: FormState; setForm: (f: FormS
                                 onClick={() => setForm({ ...form, reminderRepeat: value, reminderDays: value === 'custom' ? form.reminderDays : [] })}
                                 className={`py-1.5 rounded-lg text-xs font-bold border transition-all ${
                                     form.reminderRepeat === value
-                                        ? 'bg-cyan-950/50 text-cyan-400 border-cyan-800/50'
+                                        ? 'bg-sky-950/50 text-sky-400 border-sky-800/50'
                                         : 'bg-slate-900 text-slate-500 border-slate-800 hover:border-slate-600'
                                 }`}>
                                 {label}
@@ -104,8 +104,8 @@ function ReminderFields({ form, setForm }: { form: FormState; setForm: (f: FormS
                             return (
                                 <button key={day} onClick={() => isCustom && toggleDay(i)} disabled={!isCustom}
                                     className={`py-2 rounded-md text-[10px] font-bold transition-all ${
-                                        active ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-500'
-                                    } ${isCustom ? 'hover:bg-cyan-800 cursor-pointer' : 'cursor-default'}`}>
+                                        active ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-500'
+                                    } ${isCustom ? 'hover:bg-sky-800 cursor-pointer' : 'cursor-default'}`}>
                                     {day[0]}
                                 </button>
                             );
@@ -138,7 +138,7 @@ const shiftIcon = (shift: string) => {
 const shiftColor = (shift: string) => {
     switch (shift) {
         case 'Morning':   return 'text-amber-400 bg-amber-950/30';
-        case 'Afternoon': return 'text-cyan-400 bg-cyan-950/30';
+        case 'Afternoon': return 'text-sky-400 bg-sky-950/30';
         case 'Night':     return 'text-purple-400 bg-purple-950/30';
         case 'Off':       return 'text-slate-500 bg-slate-900/30';
         default: return 'text-slate-600';
@@ -260,7 +260,7 @@ export function PlannerPage() {
                 {!isToday(selectedDate) && (
                     <button
                         onClick={() => { setSelectedDate(new Date()); setCurrentWeek(new Date()); }}
-                        className="text-xs font-bold text-cyan-400 border border-cyan-800/50 px-3 py-1.5 rounded-lg hover:bg-cyan-950/30 transition-colors"
+                        className="text-xs font-bold text-sky-400 border border-sky-800/50 px-3 py-1.5 rounded-lg hover:bg-sky-950/30 transition-colors"
                     >
                         Today
                     </button>
@@ -268,16 +268,16 @@ export function PlannerPage() {
             </div>
 
             {/* ── Week Strip ─────────────────────────────────────────── */}
-            <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-3 space-y-3">
+            <div className="glass-card rounded-xl p-3 space-y-3">
                 {/* week nav */}
                 <div className="flex items-center justify-between">
                     <button onClick={() => setCurrentWeek(subWeeks(currentWeek, 1))}
-                        className="p-1.5 text-slate-400 hover:text-cyan-400 transition-colors">
+                        className="p-1.5 text-slate-400 hover:text-sky-400 transition-colors">
                         <ChevronLeft className="w-5 h-5" />
                     </button>
                     <span className="text-sm font-bold text-white">{format(weekStart, 'MMMM yyyy')}</span>
                     <button onClick={() => setCurrentWeek(addWeeks(currentWeek, 1))}
-                        className="p-1.5 text-slate-400 hover:text-cyan-400 transition-colors">
+                        className="p-1.5 text-slate-400 hover:text-sky-400 transition-colors">
                         <ChevronRight className="w-5 h-5" />
                     </button>
                 </div>
@@ -303,12 +303,12 @@ export function PlannerPage() {
                             <button key={ds} onClick={() => setSelectedDate(day)}
                                 className={cn(
                                     'rounded-xl flex flex-col items-center justify-center py-2 gap-1 border-2 transition-all',
-                                    isSel  ? 'border-cyan-500 bg-cyan-950/40 scale-105'
-                                           : isNow ? 'border-cyan-500/40 bg-slate-800/40'
+                                    isSel  ? 'border-sky-500 bg-sky-950/40 scale-105'
+                                           : isNow ? 'border-sky-500/40 bg-slate-800/40'
                                                    : 'border-slate-800 hover:border-slate-600 hover:bg-slate-800/30'
                                 )}>
                                 <span className={cn('text-sm font-bold',
-                                    isSel ? 'text-cyan-400' : isNow ? 'text-cyan-300' : 'text-slate-300')}>
+                                    isSel ? 'text-sky-400' : isNow ? 'text-sky-300' : 'text-slate-300')}>
                                     {format(day, 'd')}
                                 </span>
 
@@ -321,7 +321,7 @@ export function PlannerPage() {
 
                                 {/* task count badge */}
                                 {taskCount > 0 && (
-                                    <span className="text-[9px] font-bold text-cyan-400 bg-cyan-950/60 px-1 rounded">
+                                    <span className="text-[9px] font-bold text-sky-400 bg-sky-950/60 px-1 rounded">
                                         {taskCount}
                                     </span>
                                 )}
@@ -333,11 +333,11 @@ export function PlannerPage() {
                 {/* legend */}
                 <div className="flex items-center justify-center gap-4 pt-1">
                     <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                        <div className="w-2 h-2 rounded-full bg-sky-400" />
                         <span className="text-[10px] text-slate-500">Today</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-cyan-400 font-bold">3</span>
+                        <span className="text-[10px] text-sky-400 font-bold">3</span>
                         <span className="text-[10px] text-slate-500">= pending tasks</span>
                     </div>
                 </div>
@@ -364,24 +364,24 @@ export function PlannerPage() {
             {/* ── Add Task Button ─────────────────────────────────────── */}
             <button
                 onClick={() => setShowAddForm(v => !v)}
-                className="w-full flex items-center justify-center gap-2 bg-cyan-700/40 hover:bg-cyan-700/60 border border-cyan-800/50 text-cyan-300 font-bold py-3 rounded-lg transition-colors"
+                className="w-full flex items-center justify-center gap-2 bg-sky-700/40 hover:bg-sky-700/60 border border-sky-800/50 text-sky-300 font-bold py-3 rounded-lg transition-colors"
             >
                 {showAddForm ? <><X className="w-4 h-4" /> Cancel</> : <><Plus className="w-4 h-4" /> Add Task</>}
             </button>
 
             {/* ── Add Form ───────────────────────────────────────────── */}
             {showAddForm && (
-                <div className="bg-slate-900/50 border border-cyan-800/50 rounded-lg p-4 space-y-4">
+                <div className="bg-slate-900/50 border border-sky-800/50 rounded-lg p-4 space-y-4">
                     <input value={addForm.title} onChange={e => setAddForm({ ...addForm, title: e.target.value })}
                         placeholder="Task title..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-sky-500 transition-colors"
                         onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleAdd()}
                     />
                     <div className="relative">
                         <StickyNote className="absolute left-3 top-3 w-4 h-4 text-slate-500" />
                         <textarea value={addForm.notes} onChange={e => setAddForm({ ...addForm, notes: e.target.value })}
                             placeholder="Notes (optional)..." rows={2}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors resize-none"
                         />
                     </div>
                     <div className="space-y-2">
@@ -391,7 +391,7 @@ export function PlannerPage() {
                     <ReminderFields form={addForm} setForm={setAddForm} />
                     <div className="flex gap-2 pt-1">
                         <button onClick={handleAdd} disabled={!addForm.title.trim()}
-                            className="flex-1 bg-cyan-700/50 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-cyan-100 font-bold py-3 rounded-lg transition-colors">
+                            className="flex-1 bg-sky-700/50 hover:bg-sky-600 disabled:bg-slate-800 disabled:text-slate-600 text-sky-100 font-bold py-3 rounded-lg transition-colors">
                             Add Task
                         </button>
                         <button onClick={() => { setShowAddForm(false); setAddForm({ ...BLANK }); }}
@@ -469,8 +469,8 @@ export function PlannerPage() {
                                                             )}
                                                             {label && (
                                                                 <div className="flex items-center gap-1 mt-1.5">
-                                                                    <Bell className="w-3 h-3 text-cyan-500" />
-                                                                    <span className="text-[11px] text-cyan-400 font-mono">{label}</span>
+                                                                    <Bell className="w-3 h-3 text-sky-500" />
+                                                                    <span className="text-[11px] text-sky-400 font-mono">{label}</span>
                                                                 </div>
                                                             )}
                                                             {task.reminderTime && !task.reminderEnabled && (
@@ -484,7 +484,7 @@ export function PlannerPage() {
                                                         {/* actions */}
                                                         <div className="flex items-center gap-0.5 flex-shrink-0">
                                                             <button onClick={() => openEdit(task)}
-                                                                className="p-2 text-slate-400 hover:text-cyan-400 active:text-cyan-400 transition-colors">
+                                                                className="p-2 text-slate-400 hover:text-sky-400 active:text-sky-400 transition-colors">
                                                                 <Edit2 className="w-4 h-4" />
                                                             </button>
                                                             <button onClick={async () => {
@@ -507,7 +507,7 @@ export function PlannerPage() {
             )}
 
             {/* ── Shift Selector ─────────────────────────────────────── */}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
+            <div className="glass-card rounded-xl p-4 space-y-3">
                 <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Schedule for {isToday(selectedDate) ? 'Today' : format(selectedDate, 'MMM d')}</p>
                 <ShiftSelector
                     value={{ shift: dayShift.shift, location: dayShift.location }}
@@ -533,13 +533,13 @@ export function PlannerPage() {
                             </div>
                             <input value={editForm.title} onChange={e => setEditForm({ ...editForm, title: e.target.value })}
                                 placeholder="Task title..."
-                                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-sky-500 transition-colors"
                             />
                             <div className="relative">
                                 <StickyNote className="absolute left-3 top-3 w-4 h-4 text-slate-500" />
                                 <textarea value={editForm.notes} onChange={e => setEditForm({ ...editForm, notes: e.target.value })}
                                     placeholder="Notes..." rows={2}
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors resize-none"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -548,7 +548,7 @@ export function PlannerPage() {
                             </div>
                             <ReminderFields form={editForm} setForm={setEditForm} />
                             <button onClick={handleSaveEdit} disabled={!editForm.title.trim()}
-                                className="w-full flex items-center justify-center gap-2 bg-cyan-700/50 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-cyan-100 font-bold py-3 rounded-lg transition-colors">
+                                className="w-full flex items-center justify-center gap-2 bg-sky-700/50 hover:bg-sky-600 disabled:bg-slate-800 disabled:text-slate-600 text-sky-100 font-bold py-3 rounded-lg transition-colors">
                                 <Save className="w-4 h-4" /> Save Changes
                             </button>
                         </div>

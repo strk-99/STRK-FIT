@@ -104,9 +104,9 @@ export function DailyCard() {
                         {format(new Date(), 'EEEE, MMM do')}
                     </p>
                 </div>
-                <div className="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg flex flex-col items-center glow-border-cyan shadow-lg shadow-cyan-900/20">
+                <div className="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-lg flex flex-col items-center glow-border-cyan shadow-lg shadow-sky-900/20">
                     <span className="text-[10px] text-slate-500 uppercase font-bold">Streak</span>
-                    <div className="flex items-center gap-1.5 text-cyan-400 font-mono font-bold">
+                    <div className="flex items-center gap-1.5 text-sky-400 font-mono font-bold">
                         <Trophy className="w-3 h-3" />
                         <span>{Math.floor(progress)}</span>
                     </div>
@@ -114,8 +114,8 @@ export function DailyCard() {
             </div>
 
             {/* PROTOCOL CARD */}
-            <div className="bg-slate-900/50 border-l-4 border-cyan-500 pl-4 py-3 rounded-r-lg">
-                <p className="text-[10px] text-cyan-500 font-bold uppercase tracking-wider mb-1">Protocol</p>
+            <div className="bg-slate-900/50 border-l-4 border-sky-500 pl-4 py-3 rounded-r-lg">
+                <p className="text-[10px] text-sky-500 font-bold uppercase tracking-wider mb-1">Protocol</p>
                 <p className="text-white font-bold text-lg">{shiftState.shift} Shift @ {shiftState.location}</p>
             </div>
 
@@ -291,7 +291,7 @@ export function DailyCard() {
 
             {/* 3. WATER SECTION */}
             <div className="space-y-3 pt-4 border-t border-slate-800/50">
-                <div className="flex items-center gap-2 text-cyan-400">
+                <div className="flex items-center gap-2 text-sky-400">
                     <Droplet className="w-5 h-5" />
                     <h2 className="font-bold uppercase tracking-wider text-sm">Water</h2>
                 </div>
@@ -299,21 +299,21 @@ export function DailyCard() {
                 <div className="bg-slate-900/50 p-6 rounded-xl border border-slate-800 flex items-center justify-between">
                     <button
                         onClick={() => handleUpdateWater(-1)}
-                        className="w-12 h-12 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center hover:border-cyan-500/50 transition-colors"
+                        className="w-12 h-12 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center hover:border-sky-500/50 transition-colors"
                     >
                         <Minus className="w-6 h-6 text-slate-400" />
                     </button>
 
                     <div className="text-center">
                         <span className="text-4xl font-bold text-white">{waterCount}</span>
-                        <p className="text-[10px] text-cyan-500 font-bold uppercase tracking-widest mt-1">Glasses</p>
+                        <p className="text-[10px] text-sky-500 font-bold uppercase tracking-widest mt-1">Glasses</p>
                     </div>
 
                     <button
                         onClick={() => handleUpdateWater(1)}
-                        className="w-12 h-12 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center hover:border-cyan-500/50 transition-colors"
+                        className="w-12 h-12 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center hover:border-sky-500/50 transition-colors"
                     >
-                        <Plus className="w-6 h-6 text-cyan-400" />
+                        <Plus className="w-6 h-6 text-sky-400" />
                     </button>
                 </div>
             </div>

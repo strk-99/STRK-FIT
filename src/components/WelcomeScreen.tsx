@@ -28,12 +28,12 @@ export function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
             {/* Main card container */}
             <div className="relative max-w-md w-full">
                 {/* Futuristic card with glowing border */}
-                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-xl rounded-3xl p-4 border-2 border-white/20 shadow-2xl shadow-cyan-500/20 animate-fade-in">
+                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-xl rounded-3xl p-4 border-2 border-white/20 shadow-2xl shadow-sky-500/20 animate-fade-in">
                     {/* Corner accents */}
-                    <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-cyan-400/50 rounded-tl-3xl"></div>
-                    <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-cyan-400/50 rounded-tr-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-cyan-400/50 rounded-bl-3xl"></div>
-                    <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-cyan-400/50 rounded-br-3xl"></div>
+                    <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-sky-400/50 rounded-tl-3xl"></div>
+                    <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-sky-400/50 rounded-tr-3xl"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-sky-400/50 rounded-bl-3xl"></div>
+                    <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-sky-400/50 rounded-br-3xl"></div>
 
                     <div className="text-center space-y-2 relative z-10">
                         {/* Welcome text */}
@@ -63,21 +63,21 @@ export function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
                         {/* Loading indicator */}
                         <div className="flex justify-center pt-4">
                             <div className="flex gap-3">
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50"></div>
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50" style={{ animationDelay: '0.2s' }}></div>
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-lg shadow-cyan-400/50" style={{ animationDelay: '0.4s' }}></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse shadow-lg shadow-sky-400/50"></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse shadow-lg shadow-sky-400/50" style={{ animationDelay: '0.2s' }}></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full animate-pulse shadow-lg shadow-sky-400/50" style={{ animationDelay: '0.4s' }}></div>
                             </div>
                         </div>
                     </div>
 
                     {/* Animated scan line effect */}
                     <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
-                        <div className="absolute w-full h-1 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent animate-scan-line"></div>
+                        <div className="absolute w-full h-1 bg-gradient-to-r from-transparent via-sky-400/30 to-transparent animate-scan-line"></div>
                     </div>
                 </div>
 
                 {/* Outer glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-emerald-500/5 to-cyan-500/5 rounded-3xl blur-xl -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-sky-500/5 via-emerald-500/5 to-sky-500/5 rounded-3xl blur-xl -z-10"></div>
             </div>
         </div>
     );

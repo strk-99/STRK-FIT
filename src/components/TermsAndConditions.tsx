@@ -7,12 +7,12 @@ interface TermsAndConditionsProps {
 export function TermsAndConditions({ onClose }: TermsAndConditionsProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="glass-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-cyan-950/30 rounded-lg">
-                            <FileText className="w-6 h-6 text-cyan-400" />
+                        <div className="p-2 bg-sky-950/30 rounded-lg">
+                            <FileText className="w-6 h-6 text-sky-400" />
                         </div>
                         <h2 className="text-2xl font-bold text-white">Terms & Conditions</h2>
                     </div>
@@ -149,7 +149,7 @@ export function TermsAndConditions({ onClose }: TermsAndConditionsProps) {
                         <p className="text-sm leading-relaxed">
                             If you have any questions about these Terms & Conditions, please contact us at:
                         </p>
-                        <p className="text-sm text-cyan-400 mt-2">
+                        <p className="text-sm text-sky-400 mt-2">
                             pvsuryateja99@gmail.com
                         </p>
                     </section>
@@ -166,7 +166,7 @@ export function TermsAndConditions({ onClose }: TermsAndConditionsProps) {
                 <div className="p-6 border-t border-slate-800 bg-slate-950/50">
                     <button
                         onClick={onClose}
-                        className="w-full bg-gradient-to-r from-cyan-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white font-bold py-3 rounded-lg transition-all"
+                        className="w-full bg-gradient-to-r from-sky-600 to-emerald-600 hover:from-sky-500 hover:to-emerald-500 text-white font-bold py-3 rounded-lg transition-all"
                     >
                         I Understand
                     </button>

@@ -121,7 +121,7 @@ export function ResourceHub() {
                             className="w-full bg-black border border-white/10 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-white/30"
                         />
                         <div className="flex gap-2">
-                            <button onClick={handleAdd} className="flex-1 bg-white/[0.12] hover:bg-cyan-500 text-white py-2 rounded font-bold text-sm transition-colors">Save</button>
+                            <button onClick={handleAdd} className="flex-1 bg-white/[0.12] hover:bg-sky-500 text-white py-2 rounded font-bold text-sm transition-colors">Save</button>
                             <button onClick={() => setIsAdding(false)} className="flex-1 bg-white/10 hover:bg-white/[0.13] text-white/70 py-2 rounded font-bold text-sm transition-colors">Cancel</button>
                         </div>
                     </div>
@@ -146,7 +146,7 @@ export function ResourceHub() {
                                         href={res.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="block bg-white/[0.06] border border-white/10 rounded-xl overflow-hidden hover:border-white/40 hover:shadow-lg hover:shadow-cyan-500/10 transition-all"
+                                        className="block bg-white/[0.06] border border-white/10 rounded-xl overflow-hidden hover:border-white/40 hover:shadow-lg hover:shadow-sky-500/10 transition-all"
                                     >
                                         <div className="flex gap-3 p-3">
                                             {/* Thumbnail or Icon */}
@@ -165,7 +165,7 @@ export function ResourceHub() {
                                                         </div>
                                                     </div>
                                                 ) : (
-                                                    <div className="w-24 h-16 bg-gradient-to-br from-cyan-950/30 to-slate-950 border border-white/10 rounded-lg flex items-center justify-center">
+                                                    <div className="w-24 h-16 bg-gradient-to-br from-sky-950/30 to-slate-950 border border-white/10 rounded-lg flex items-center justify-center">
                                                         <LinkIcon className="w-6 h-6 text-white/50" />
                                                     </div>
                                                 )}

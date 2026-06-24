@@ -77,7 +77,7 @@ export function NotesList() {
             'text-yellow-400',
             'text-pink-400',
             'text-indigo-400',
-            'text-cyan-400',
+            'text-sky-400',
             'text-orange-400'
         ];
         return colors[hash % colors.length];

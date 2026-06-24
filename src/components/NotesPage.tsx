@@ -94,7 +94,7 @@ export function NotesPage() {
             <div className="flex flex-col animate-fade-up">
                 <div className="px-4 py-3 flex items-center justify-between border-b border-slate-800/60 bg-slate-950/80">
                     <button onClick={handleBack}
-                        className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        className="flex items-center gap-2 text-sky-400 hover:text-sky-300 transition-colors">
                         <ArrowLeft className="w-5 h-5" />
                         <span className="font-semibold text-sm">Notes</span>
                     </button>
@@ -167,8 +167,8 @@ export function NotesPage() {
                             </button>
                         )}
                         <button onClick={openNew}
-                            className="w-10 h-10 bg-cyan-700/50 hover:bg-cyan-600/60 border border-cyan-800/50 rounded-full flex items-center justify-center transition-colors">
-                            <Plus className="w-5 h-5 text-cyan-400" />
+                            className="w-10 h-10 bg-sky-700/50 hover:bg-sky-600/60 border border-sky-800/50 rounded-full flex items-center justify-center transition-colors">
+                            <Plus className="w-5 h-5 text-sky-400" />
                         </button>
                     </div>
                 </div>
@@ -196,9 +196,9 @@ export function NotesPage() {
                 <button onClick={toggleSelectAll}
                     className="w-full flex items-center gap-2 py-2 px-3 bg-slate-900/50 border border-slate-800 rounded-lg text-sm transition-colors hover:border-slate-600">
                     {allSelected
-                        ? <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                        ? <CheckCircle2 className="w-4 h-4 text-sky-400" />
                         : <Circle className="w-4 h-4 text-slate-500" />}
-                    <span className={allSelected ? 'text-cyan-400 font-bold' : 'text-slate-400'}>
+                    <span className={allSelected ? 'text-sky-400 font-bold' : 'text-slate-400'}>
                         {allSelected ? 'Deselect all' : 'Select all'}
                     </span>
                 </button>
@@ -212,7 +212,7 @@ export function NotesPage() {
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                         placeholder="Search notes..."
-                        className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-10 pr-9 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                        className="w-full bg-slate-900 border border-slate-800 rounded-lg pl-10 pr-9 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors"
                     />
                     {search && (
                         <button onClick={() => setSearch('')}
@@ -232,7 +232,7 @@ export function NotesPage() {
                     </p>
                     {!search && (
                         <button onClick={openNew}
-                            className="inline-flex items-center gap-2 text-sm text-cyan-400 border border-cyan-800/50 px-4 py-2 rounded-lg hover:bg-cyan-950/30 transition-colors">
+                            className="inline-flex items-center gap-2 text-sm text-sky-400 border border-sky-800/50 px-4 py-2 rounded-lg hover:bg-sky-950/30 transition-colors">
                             <Plus className="w-4 h-4" /> Create your first note
                         </button>
                     )}
@@ -247,7 +247,7 @@ export function NotesPage() {
                                 onClick={() => selectMode ? toggleSelect(note.id) : openNote(note)}
                                 className={`relative text-left rounded-xl p-3.5 space-y-2 border transition-all active:scale-95 ${
                                     selectMode && isSelected
-                                        ? 'bg-cyan-950/30 border-cyan-600'
+                                        ? 'bg-sky-950/30 border-sky-600'
                                         : 'bg-slate-900/70 border-slate-800 hover:border-slate-600'
                                 }`}
                             >
@@ -255,11 +255,11 @@ export function NotesPage() {
                                 {selectMode && (
                                     <div className="absolute top-2.5 right-2.5">
                                         {isSelected
-                                            ? <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+                                            ? <CheckCircle2 className="w-4 h-4 text-sky-400" />
                                             : <Circle className="w-4 h-4 text-slate-600" />}
                                     </div>
                                 )}
-                                <p className={`font-bold text-sm leading-snug line-clamp-2 ${selectMode ? 'pr-5' : ''} ${isSelected ? 'text-cyan-300' : 'text-white'}`}>
+                                <p className={`font-bold text-sm leading-snug line-clamp-2 ${selectMode ? 'pr-5' : ''} ${isSelected ? 'text-sky-300' : 'text-white'}`}>
                                     {note.title || 'Untitled'}
                                 </p>
                                 {note.body ? (

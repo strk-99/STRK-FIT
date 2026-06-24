@@ -234,7 +234,7 @@ export function WeeklyReview() {
                         className={cn(
                             "px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-all flex-shrink-0",
                             period === p
-                                ? 'bg-gradient-to-r from-cyan-600 to-emerald-600 text-white shadow-lg'
+                                ? 'bg-gradient-to-r from-sky-600 to-emerald-600 text-white shadow-lg'
                                 : 'bg-slate-900 text-slate-400 hover:bg-slate-800 border border-slate-800'
                         )}
                     >
@@ -312,14 +312,14 @@ export function WeeklyReview() {
             )}
 
             {/* Consistency Score */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+            <div className="glass-card rounded-xl p-5">
                 <div className="flex items-center justify-between mb-3">
                     <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Consistency Score</p>
-                    <p className="text-2xl font-bold text-cyan-400">{stats.score}%</p>
+                    <p className="text-2xl font-bold text-sky-400">{stats.score}%</p>
                 </div>
                 <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
                     <div
-                        className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-700"
+                        className="h-full rounded-full bg-gradient-to-r from-sky-500 to-emerald-500 transition-all duration-700"
                         style={{ width: `${stats.score}%` }}
                     />
                 </div>
@@ -404,7 +404,7 @@ export function WeeklyReview() {
 
             {/* Mood Breakdown */}
             {Object.values(stats.moodCounts).some(v => v > 0) && (
-                <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-3">
+                <div className="glass-card rounded-xl p-4 space-y-3">
                     <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">Mood Breakdown</p>
                     <div className="grid grid-cols-5 gap-2">
                         {(Object.entries(stats.moodCounts) as [MoodType, number][]).map(([mood, count]) => (

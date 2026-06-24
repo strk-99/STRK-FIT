@@ -34,7 +34,7 @@ export function ShiftSelector({ value, onChange }: ShiftSelectorProps) {
                         className={cn(
                             "flex flex-col items-center gap-1 py-2 rounded-lg border transition-all",
                             value.shift === s.id
-                                ? "bg-slate-800 border-cyan-500 text-cyan-400"
+                                ? "bg-slate-800 border-sky-500 text-sky-400"
                                 : "bg-slate-900/50 border-slate-800 text-slate-500 hover:border-slate-600 hover:text-slate-400"
                         )}
                     >

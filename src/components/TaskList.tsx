@@ -139,7 +139,7 @@ export function TaskList() {
                 </div>
                 <button
                     onClick={() => setShowAddForm(!showAddForm)}
-                    className="bg-cyan-700/50 hover:bg-cyan-600 text-cyan-100 p-2 rounded-lg transition-colors"
+                    className="bg-sky-700/50 hover:bg-sky-600 text-sky-100 p-2 rounded-lg transition-colors"
                 >
                     {showAddForm ? <ChevronUp className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                 </button>
@@ -152,7 +152,7 @@ export function TaskList() {
                         value={taskTitle}
                         onChange={(e) => setTaskTitle(e.target.value)}
                         placeholder="Task title..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors"
                         onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && handleAddTask()}
                     />
 
@@ -160,7 +160,7 @@ export function TaskList() {
                         value={taskDescription}
                         onChange={(e) => setTaskDescription(e.target.value)}
                         placeholder="Description (optional)..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors resize-none"
                         rows={2}
                     />
 
@@ -203,14 +203,14 @@ export function TaskList() {
                             type="time"
                             value={reminderTime}
                             onChange={(e) => setReminderTime(e.target.value)}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors"
                         />
                     </div>
 
                     <button
                         onClick={handleAddTask}
                         disabled={!taskTitle.trim()}
-                        className="w-full bg-cyan-700/50 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-cyan-100 font-bold py-2 rounded-lg transition-colors"
+                        className="w-full bg-sky-700/50 hover:bg-sky-600 disabled:bg-slate-800 disabled:text-slate-600 text-sky-100 font-bold py-2 rounded-lg transition-colors"
                     >
                         Add Task
                     </button>
@@ -281,7 +281,7 @@ export function TaskList() {
                                                                 value={task.reminderTime}
                                                                 onChange={(e) => handleUpdateReminderTime(task.id, e.target.value)}
                                                                 onBlur={() => setEditingTaskId(null)}
-                                                                className="bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-cyan-500"
+                                                                className="bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-sky-500"
                                                                 autoFocus
                                                             />
                                                         ) : (
@@ -289,7 +289,7 @@ export function TaskList() {
                                                                 onClick={() => setEditingTaskId(task.id)}
                                                                 className={`flex items-center gap-1 px-2 py-1 rounded text-xs ${
                                                                     task.reminderEnabled
-                                                                        ? 'bg-cyan-950/50 text-cyan-400 border border-cyan-800/50'
+                                                                        ? 'bg-sky-950/50 text-sky-400 border border-sky-800/50'
                                                                         : 'bg-slate-950/50 text-slate-500 border border-slate-800/50'
                                                                 }`}
                                                             >
@@ -299,7 +299,7 @@ export function TaskList() {
                                                         )}
                                                         <button
                                                             onClick={() => handleToggleReminder(task)}
-                                                            className="text-xs text-slate-500 hover:text-cyan-400 transition-colors"
+                                                            className="text-xs text-slate-500 hover:text-sky-400 transition-colors"
                                                         >
                                                             {task.reminderEnabled ? 'Enabled' : 'Disabled'}
                                                         </button>

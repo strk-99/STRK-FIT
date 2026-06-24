@@ -7,7 +7,7 @@ interface HealthDisclaimerProps {
 export function HealthDisclaimer({ onClose }: HealthDisclaimerProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="glass-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3">
@@ -240,9 +240,9 @@ export function HealthDisclaimer({ onClose }: HealthDisclaimerProps) {
                     </section>
 
                     <div className="pt-6 border-t border-slate-800">
-                        <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-lg p-4">
+                        <div className="bg-sky-950/20 border border-sky-900/50 rounded-lg p-4">
                             <p className="text-xs text-slate-300 italic">
-                                <strong className="text-cyan-400">Remember:</strong> STRK-FIT is a tool to help you
+                                <strong className="text-sky-400">Remember:</strong> STRK-FIT is a tool to help you
                                 track your fitness journey. Your health and safety are paramount. Always listen to
                                 your body, consult healthcare professionals when needed, and use the app as a supplement
                                 to - not a replacement for - professional medical care.

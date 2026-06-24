@@ -32,7 +32,7 @@ export function CalendarView() {
     const getShiftColor = (shift: string) => {
         switch (shift) {
             case 'Morning': return 'text-amber-400 bg-amber-950/30';
-            case 'Afternoon': return 'text-cyan-400 bg-cyan-950/30';
+            case 'Afternoon': return 'text-sky-400 bg-sky-950/30';
             case 'Night': return 'text-purple-400 bg-purple-950/30';
             case 'Off': return 'text-slate-500 bg-slate-900/30';
             default: return 'text-slate-600';
@@ -45,7 +45,7 @@ export function CalendarView() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                        <CalendarDays className="w-6 h-6 text-cyan-400" />
+                        <CalendarDays className="w-6 h-6 text-sky-400" />
                         Schedule
                     </h1>
                     <p className="text-xs text-slate-500 mt-1">Plan your week ahead</p>
@@ -56,7 +56,7 @@ export function CalendarView() {
             <div className="flex items-center justify-between bg-slate-900 rounded-xl p-3 border border-slate-800">
                 <button
                     onClick={handlePrevWeek}
-                    className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-cyan-400 transition-colors"
+                    className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-sky-400 transition-colors"
                 >
                     <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -66,7 +66,7 @@ export function CalendarView() {
                 </div>
                 <button
                     onClick={handleNextWeek}
-                    className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-cyan-400 transition-colors"
+                    className="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-sky-400 transition-colors"
                 >
                     <ChevronRight className="w-5 h-5" />
                 </button>
@@ -100,16 +100,16 @@ export function CalendarView() {
                                 className={cn(
                                     "aspect-square rounded-xl flex flex-col items-center justify-center relative border-2 transition-all p-2",
                                     isSelected
-                                        ? "border-cyan-500 bg-cyan-950/30 shadow-lg shadow-cyan-900/20 scale-105"
+                                        ? "border-sky-500 bg-sky-950/30 shadow-lg shadow-sky-900/20 scale-105"
                                         : "border-slate-800 hover:border-slate-700 hover:bg-slate-800/50",
-                                    isTodayDate && !isSelected && "border-cyan-500/50 bg-slate-800/30",
+                                    isTodayDate && !isSelected && "border-sky-500/50 bg-slate-800/30",
                                     !history && "opacity-60"
                                 )}
                             >
                                 {/* Date number */}
                                 <span className={cn(
                                     "text-sm font-bold mb-1",
-                                    isSelected ? "text-cyan-400" : isTodayDate ? "text-cyan-400" : "text-slate-300"
+                                    isSelected ? "text-sky-400" : isTodayDate ? "text-sky-400" : "text-slate-300"
                                 )}>
                                     {format(day, 'd')}
                                 </span>
@@ -134,7 +134,7 @@ export function CalendarView() {
                                 {/* Today indicator */}
                                 {isTodayDate && (
                                     <div className="absolute bottom-1 left-1/2 -translate-x-1/2">
-                                        <div className="w-1 h-1 rounded-full bg-cyan-400" />
+                                        <div className="w-1 h-1 rounded-full bg-sky-400" />
                                     </div>
                                 )}
                             </button>
@@ -145,7 +145,7 @@ export function CalendarView() {
                 {/* Legend */}
                 <div className="flex items-center justify-center gap-4 pt-2">
                     <div className="flex items-center gap-1.5">
-                        <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                        <div className="w-2 h-2 rounded-full bg-sky-400" />
                         <span className="text-xs text-slate-500">Today</span>
                     </div>
                     <div className="flex items-center gap-1.5">
@@ -161,7 +161,7 @@ export function CalendarView() {
                     <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl font-bold text-white flex items-center gap-2">
                             {isToday(selectedDate) && (
-                                <span className="px-2 py-0.5 bg-cyan-950/50 border border-cyan-500/50 rounded text-xs text-cyan-400 font-bold">
+                                <span className="px-2 py-0.5 bg-sky-950/50 border border-sky-500/50 rounded text-xs text-sky-400 font-bold">
                                     TODAY
                                 </span>
                             )}
@@ -199,7 +199,7 @@ export function CalendarView() {
                         )}
                         {logs[selectedDateStr].water && logs[selectedDateStr].water! > 0 && (
                             <div className="text-center">
-                                <div className="text-cyan-400 text-sm font-bold">
+                                <div className="text-sky-400 text-sm font-bold">
                                     {logs[selectedDateStr].water}
                                 </div>
                                 <p className="text-xs text-slate-500 mt-1">Water</p>

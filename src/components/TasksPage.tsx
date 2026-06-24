@@ -115,7 +115,7 @@ function ReminderFields({ form, setForm }: {
                     reminderTime: e.target.value,
                     reminderEnabled: !!e.target.value
                 })}
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors"
             />
 
             {/* repeat mode — only shown if a time is set */}
@@ -128,7 +128,7 @@ function ReminderFields({ form, setForm }: {
                                 onClick={() => setForm({ ...form, reminderRepeat: value, reminderDays: value === 'custom' ? form.reminderDays : [] })}
                                 className={`py-1.5 rounded-lg text-xs font-bold border transition-all ${
                                     form.reminderRepeat === value
-                                        ? 'bg-cyan-950/50 text-cyan-400 border-cyan-800/50'
+                                        ? 'bg-sky-950/50 text-sky-400 border-sky-800/50'
                                         : 'bg-slate-900 text-slate-500 border-slate-800 hover:border-slate-600'
                                 }`}
                             >
@@ -149,9 +149,9 @@ function ReminderFields({ form, setForm }: {
                                     disabled={!isCustom}
                                     className={`py-2 rounded-md text-[10px] font-bold transition-all ${
                                         active
-                                            ? 'bg-cyan-600 text-white'
+                                            ? 'bg-sky-600 text-white'
                                             : 'bg-slate-800 text-slate-500'
-                                    } ${isCustom ? 'hover:bg-cyan-800 cursor-pointer' : 'cursor-default'}`}
+                                    } ${isCustom ? 'hover:bg-sky-800 cursor-pointer' : 'cursor-default'}`}
                                 >
                                     {day[0]}
                                 </button>
@@ -301,7 +301,7 @@ export function TasksPage() {
                 </div>
                 <button
                     onClick={() => setShowAddForm(v => !v)}
-                    className="bg-cyan-700/50 hover:bg-cyan-600 text-cyan-100 p-3 rounded-lg transition-colors"
+                    className="bg-sky-700/50 hover:bg-sky-600 text-sky-100 p-3 rounded-lg transition-colors"
                 >
                     {showAddForm ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
                 </button>
@@ -323,12 +323,12 @@ export function TasksPage() {
 
             {/* ── Add Form ───────────────────────────────────────────────── */}
             {showAddForm && (
-                <div className="bg-slate-900/50 border border-cyan-800/50 rounded-lg p-4 space-y-4">
+                <div className="bg-slate-900/50 border border-sky-800/50 rounded-lg p-4 space-y-4">
                     <input
                         value={addForm.title}
                         onChange={e => setAddForm({ ...addForm, title: e.target.value })}
                         placeholder="Task title..."
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-sky-500 transition-colors"
                         onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleAdd()}
                     />
                     <div className="relative">
@@ -338,7 +338,7 @@ export function TasksPage() {
                             onChange={e => setAddForm({ ...addForm, notes: e.target.value })}
                             placeholder="Notes (optional)..."
                             rows={2}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                            className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors resize-none"
                         />
                     </div>
                     <div className="space-y-2">
@@ -350,7 +350,7 @@ export function TasksPage() {
                         <button
                             onClick={handleAdd}
                             disabled={!addForm.title.trim()}
-                            className="flex-1 bg-cyan-700/50 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-cyan-100 font-bold py-3 rounded-lg transition-colors"
+                            className="flex-1 bg-sky-700/50 hover:bg-sky-600 disabled:bg-slate-800 disabled:text-slate-600 text-sky-100 font-bold py-3 rounded-lg transition-colors"
                         >
                             Add Task
                         </button>
@@ -437,8 +437,8 @@ export function TasksPage() {
                                                             )}
                                                             {label && (
                                                                 <div className="flex items-center gap-1 mt-2">
-                                                                    <Bell className="w-3 h-3 text-cyan-500" />
-                                                                    <span className="text-[11px] text-cyan-400 font-mono">{label}</span>
+                                                                    <Bell className="w-3 h-3 text-sky-500" />
+                                                                    <span className="text-[11px] text-sky-400 font-mono">{label}</span>
                                                                 </div>
                                                             )}
                                                             {task.reminderTime && !task.reminderEnabled && (
@@ -453,7 +453,7 @@ export function TasksPage() {
                                                         <div className="flex items-center gap-1 flex-shrink-0">
                                                             <button
                                                                 onClick={() => openEdit(task)}
-                                                                className="p-2 text-slate-400 hover:text-cyan-400 active:text-cyan-400 transition-colors"
+                                                                className="p-2 text-slate-400 hover:text-sky-400 active:text-sky-400 transition-colors"
                                                             >
                                                                 <Edit2 className="w-4 h-4" />
                                                             </button>
@@ -509,7 +509,7 @@ export function TasksPage() {
                                 value={editForm.title}
                                 onChange={e => setEditForm({ ...editForm, title: e.target.value })}
                                 placeholder="Task title..."
-                                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-3 text-sm font-semibold text-white focus:outline-none focus:border-sky-500 transition-colors"
                             />
 
                             {/* notes */}
@@ -520,7 +520,7 @@ export function TasksPage() {
                                     onChange={e => setEditForm({ ...editForm, notes: e.target.value })}
                                     placeholder="Notes (optional)..."
                                     rows={2}
-                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                                    className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-3 py-3 text-sm text-white focus:outline-none focus:border-sky-500 transition-colors resize-none"
                                 />
                             </div>
 
@@ -537,7 +537,7 @@ export function TasksPage() {
                             <button
                                 onClick={handleSaveEdit}
                                 disabled={!editForm.title.trim()}
-                                className="w-full flex items-center justify-center gap-2 bg-cyan-700/50 hover:bg-cyan-600 disabled:bg-slate-800 disabled:text-slate-600 text-cyan-100 font-bold py-3 rounded-lg transition-colors"
+                                className="w-full flex items-center justify-center gap-2 bg-sky-700/50 hover:bg-sky-600 disabled:bg-slate-800 disabled:text-slate-600 text-sky-100 font-bold py-3 rounded-lg transition-colors"
                             >
                                 <Save className="w-4 h-4" /> Save Changes
                             </button>

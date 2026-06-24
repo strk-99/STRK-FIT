@@ -5,26 +5,22 @@
 }
 
 @layer base {
-  /* Better font rendering across all devices */
   * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Prevent text selection on touch devices for UI elements */
   button, a {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     user-select: none;
   }
 
-  /* Allow text selection in inputs and content areas */
   input, textarea, p, span {
     -webkit-user-select: text;
     user-select: text;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
     height: 100%;
@@ -33,12 +29,10 @@
   }
 
   body {
-    @apply bg-slate-950 text-slate-200 antialiased;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image:
-      linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
+    background: linear-gradient(160deg, #050c1e 0%, #080f24 55%, #060a1a 100%);
+    color: #e2e8f0;
     height: 100%;
     height: -webkit-fill-available;
     overflow: hidden;
@@ -46,7 +40,6 @@
     padding: 0;
   }
 
-  /* Root container fills viewport properly on all devices */
   #root {
     height: 100vh;
     height: -webkit-fill-available;
@@ -56,152 +49,119 @@
 }
 
 @layer utilities {
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  /* ── Glassmorphism ── */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.06);
   }
 
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .glass-card-elevated {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.08);
   }
 
-  .animate-fade-up {
-    animation: fadeUp 0.5s ease-out forwards;
+  .glass-nav {
+    background: rgba(5, 12, 30, 0.82);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border-color: rgba(255, 255, 255, 0.07);
   }
 
-  .glow-text-cyan {
-    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+  /* ── Sky blue glows ── */
+  .glow-sky {
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.18), 0 0 48px rgba(56, 189, 248, 0.08);
   }
 
-  .glow-border-cyan {
-    box-shadow: 0 0 15px rgba(34, 211, 238, 0.1);
+  .glow-sky-sm {
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
   }
 
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  .glow-text-sky {
+    text-shadow: 0 0 14px rgba(56, 189, 248, 0.65);
   }
 
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
+  /* Legacy aliases */
+  .glow-text-cyan { text-shadow: 0 0 12px rgba(56, 189, 248, 0.55); }
+  .glow-border-cyan { box-shadow: 0 0 16px rgba(56, 189, 248, 0.12); }
 
-  .animate-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
-  }
+  /* ── Scrollbar ── */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-  .animate-bounce-slow {
-    animation: bounceSlow 2s ease-in-out infinite;
-  }
+  /* ── Animations ── */
+  .animate-fade-up   { animation: fadeUp 0.4s ease-out forwards; }
+  .animate-fade-in   { animation: fadeIn 0.35s ease-out forwards; }
+  .animate-slide-up  { animation: slideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-float     { animation: float 4s ease-in-out infinite; }
+  .animate-bounce-slow { animation: bounceSlow 2.2s ease-in-out infinite; }
+  .animate-scan-line { animation: scanLine 3s ease-in-out infinite; }
+  .animate-shimmer   { animation: shimmer 2.5s linear infinite; }
+  .animate-pulse-soft { animation: pulseSoft 3s ease-in-out infinite; }
 
-  .animate-scan-line {
-    animation: scanLine 3s ease-in-out infinite;
-  }
-
-  /* Touch-friendly interactive elements */
-  .touch-target {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Safe area padding for notched devices (iPhone X+, Android with notches) */
-  .safe-top {
-    padding-top: env(safe-area-inset-top);
-  }
-
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .safe-left {
-    padding-left: env(safe-area-inset-left);
-  }
-
-  .safe-right {
-    padding-right: env(safe-area-inset-right);
-  }
+  /* ── Touch & safe area ── */
+  .touch-target { min-height: 44px; min-width: 44px; }
+  .safe-top    { padding-top:    env(safe-area-inset-top);    }
+  .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
+  .safe-left   { padding-left:   env(safe-area-inset-left);   }
+  .safe-right  { padding-right:  env(safe-area-inset-right);  }
 }
 
-/* Mobile-specific optimizations */
 @media (max-width: 640px) {
-  button, a {
-    min-height: 44px;
-  }
+  button, a { min-height: 44px; }
 }
 
-/* Tablet and larger screens */
 @media (min-width: 768px) {
-  .max-w-md {
-    box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.1);
-  }
+  .max-w-md { box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.08); }
 }
 
-/* High DPI displays (Retina, high-res Android) */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  * {
-    -webkit-font-smoothing: subpixel-antialiased;
-  }
+  * { -webkit-font-smoothing: subpixel-antialiased; }
 }
 
+/* ── Keyframes ── */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
 }
 
 @keyframes bounceSlow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
 }
 
 @keyframes scanLine {
-  0% {
-    top: 0;
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
+  0%   { top: 0;    opacity: 0; }
+  50%  {            opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1;   }
 }

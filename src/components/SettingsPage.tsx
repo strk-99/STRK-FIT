@@ -171,7 +171,7 @@ export function SettingsPage({ onBack }: SettingsPageProps) {
                                     <p className="text-xs text-white/50">Get reminded to log daily</p>
                                 </div>
                             </div>
-                            <div className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${profile?.reminderEnabled ? 'bg-cyan-500' : 'bg-slate-700'
+                            <div className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors ${profile?.reminderEnabled ? 'bg-sky-500' : 'bg-slate-700'
                                 }`}>
                                 <span
                                     className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${profile?.reminderEnabled ? 'translate-x-6' : 'translate-x-1'

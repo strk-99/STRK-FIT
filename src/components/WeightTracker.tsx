@@ -130,7 +130,7 @@ export function WeightTracker() {
                         <button
                             onClick={handleSave}
                             disabled={!newWeight || parseFloat(newWeight) <= 0}
-                            className="flex-1 bg-white/[0.12] hover:bg-cyan-500 disabled:bg-white/10 disabled:text-white/20 text-white py-3 rounded-lg font-bold transition-colors"
+                            className="flex-1 bg-white/[0.12] hover:bg-sky-500 disabled:bg-white/10 disabled:text-white/20 text-white py-3 rounded-lg font-bold transition-colors"
                         >
                             Save
                         </button>

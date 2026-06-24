@@ -89,8 +89,8 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 bg-gradient-to-br from-cyan-900/30 to-slate-900 border border-cyan-500/30 rounded-full flex items-center justify-center">
-                            <UserIcon className="w-6 h-6 text-cyan-400" />
+                        <div className="w-12 h-12 bg-gradient-to-br from-sky-900/30 to-slate-900 border border-sky-500/30 rounded-full flex items-center justify-center">
+                            <UserIcon className="w-6 h-6 text-sky-400" />
                         </div>
                         <div>
                             <h1 className="text-2xl font-bold text-white">{profile ? 'Edit Profile' : 'Setup Profile'}</h1>
@@ -109,7 +109,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
 
                 {/* Profile Form */}
                 <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl space-y-4">
-                    <h2 className="text-lg font-bold text-cyan-400 mb-4">Personal Information</h2>
+                    <h2 className="text-lg font-bold text-sky-400 mb-4">Personal Information</h2>
 
                     {/* Name */}
                     <div>
@@ -120,7 +120,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             type="text"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                             placeholder="Enter your name"
                         />
                     </div>
@@ -134,7 +134,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             type="number"
                             value={formData.age}
                             onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                             placeholder="Enter your age"
                         />
                     </div>
@@ -148,7 +148,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             type="date"
                             value={formData.dob}
                             onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                         />
                     </div>
 
@@ -162,7 +162,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             step="0.1"
                             value={formData.height}
                             onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                             placeholder="Enter your height in cm"
                         />
                     </div>
@@ -177,7 +177,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             step="0.1"
                             value={formData.currentWeight}
                             onChange={(e) => setFormData({ ...formData, currentWeight: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                             placeholder="Enter your current weight"
                         />
                     </div>
@@ -192,7 +192,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                             step="0.1"
                             value={formData.targetWeight}
                             onChange={(e) => setFormData({ ...formData, targetWeight: e.target.value })}
-                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none"
+                            className="w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-lg text-white focus:border-sky-500 focus:outline-none"
                             placeholder="Enter your target weight"
                         />
                     </div>
@@ -217,8 +217,8 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                         </div>
                         <button
                             onClick={() => setFormData({ ...formData, reminderEnabled: !formData.reminderEnabled })}
-                            className={`relative w-11 h-6 rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-slate-900 ${formData.reminderEnabled
-                                ? 'bg-cyan-600'
+                            className={`relative w-11 h-6 rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-900 ${formData.reminderEnabled
+                                ? 'bg-sky-600'
                                 : 'bg-slate-700'
                                 }`}
                         >
@@ -281,7 +281,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                 {/* Save Button */}
                 <button
                     onClick={handleSave}
-                    className="w-full py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
                 >
                     <Save className="w-5 h-5" />
                     {profile ? 'Update Profile' : 'Create Profile'}
@@ -296,7 +296,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
             {/* SECTION 1: IDENTITY CARD */}
             <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl relative overflow-hidden shadow-lg">
                 <div className="absolute top-0 right-0 p-4 opacity-5">
-                    <UserIcon className="w-32 h-32 text-cyan-400" />
+                    <UserIcon className="w-32 h-32 text-sky-400" />
                 </div>
 
                 <div className="relative z-10">
@@ -324,7 +324,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                                 });
                                 setShowProfileForm(true);
                             }}
-                            className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-cyan-400 transition-colors"
+                            className="p-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-400 hover:text-sky-400 transition-colors"
                             title="Edit Profile"
                         >
                             <UserIcon className="w-4 h-4" />
@@ -332,8 +332,8 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                     </div>
 
                     <div className="flex items-center gap-4 mb-4">
-                        <div className="w-16 h-16 bg-gradient-to-br from-cyan-900/30 to-slate-900 border border-cyan-500/30 rounded-full flex items-center justify-center">
-                            <UserIcon className="w-8 h-8 text-cyan-400" />
+                        <div className="w-16 h-16 bg-gradient-to-br from-sky-900/30 to-slate-900 border border-sky-500/30 rounded-full flex items-center justify-center">
+                            <UserIcon className="w-8 h-8 text-sky-400" />
                         </div>
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold text-white tracking-wide mb-1">{profile.name}</h2>
@@ -400,7 +400,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                                 <Pencil className="w-3 h-3 text-slate-500" />
                             </button>
                         </div>
-                        <div className="text-2xl font-mono text-cyan-400 font-bold">
+                        <div className="text-2xl font-mono text-sky-400 font-bold">
                             {profile.targetWeight} <span className="text-sm text-slate-600">kg</span>
                         </div>
                     </div>
@@ -451,7 +451,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                     </div>
                     <div className="flex justify-between text-xs">
                         <span className="text-slate-500">Next check-in:</span>
-                        <span className="text-cyan-400 font-bold">
+                        <span className="text-sky-400 font-bold">
                             {nextCheckIn === 0 ? 'Ready now' : `${nextCheckIn} days`}
                         </span>
                     </div>
@@ -488,14 +488,14 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
             </div>
 
             {/* SECTION 4: "RIGHT NOW" FOCUS */}
-            <div className="bg-gradient-to-br from-cyan-950/20 to-slate-900 border border-cyan-500/30 p-5 rounded-xl">
-                <div className="text-sm font-bold text-cyan-400 mb-3 tracking-wide">
+            <div className="bg-gradient-to-br from-sky-950/20 to-slate-900 border border-sky-500/30 p-5 rounded-xl">
+                <div className="text-sm font-bold text-sky-400 mb-3 tracking-wide">
                     Right now, focus on:
                 </div>
                 <div className="space-y-2">
                     {focusItems.map((item, idx) => (
                         <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-cyan-500 flex-shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-sky-500 flex-shrink-0" />
                             <span className="text-sm text-slate-200">{item}</span>
                         </div>
                     ))}
@@ -533,7 +533,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-sm text-slate-400">Ate with awareness:</span>
-                        <span className="text-lg font-bold text-cyan-400">{snapshot.awarenessDays} days</span>
+                        <span className="text-lg font-bold text-sky-400">{snapshot.awarenessDays} days</span>
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-sm text-slate-400">Rested:</span>
@@ -559,7 +559,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                     >
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-slate-950 rounded-lg group-hover:bg-slate-900 transition-colors">
-                                <Download className="w-5 h-5 text-slate-400 group-hover:text-cyan-400" />
+                                <Download className="w-5 h-5 text-slate-400 group-hover:text-sky-400" />
                             </div>
                             <div className="text-left">
                                 <span className="block text-sm font-bold text-slate-200">Export Data</span>

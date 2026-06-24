@@ -7,7 +7,7 @@ interface DataDeletionPolicyProps {
 export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="glass-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3">
@@ -85,8 +85,8 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800 mb-3">
                             <ol className="list-decimal list-inside text-sm space-y-2">
                                 <li>Open the STRK-FIT app and log in to your account</li>
-                                <li>Navigate to the <strong className="text-cyan-400">Profile</strong> tab</li>
-                                <li>Scroll down to <strong className="text-cyan-400">Data Options</strong></li>
+                                <li>Navigate to the <strong className="text-sky-400">Profile</strong> tab</li>
+                                <li>Scroll down to <strong className="text-sky-400">Data Options</strong></li>
                                 <li>Click the <strong className="text-red-400">Reset Application</strong> button</li>
                                 <li>Confirm your decision when prompted</li>
                             </ol>
@@ -99,7 +99,7 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800">
                             <p className="text-sm mb-2">Send an email to our Data Protection Team:</p>
                             <div className="bg-slate-900 p-3 rounded-lg border border-slate-800">
-                                <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
+                                <p className="text-sm"><strong>Email:</strong> <span className="text-sky-400">pvsuryateja99@gmail.com</span></p>
                                 <p className="text-sm mt-1"><strong>Subject:</strong> Data Deletion Request</p>
                             </div>
                             <p className="text-xs text-slate-500 mt-3">
@@ -118,21 +118,21 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         <h3 className="text-lg font-bold text-white mb-3">4. Deletion Timeline</h3>
                         <div className="space-y-2">
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full mt-2 flex-shrink-0"></div>
                                 <div>
                                     <p className="text-sm font-semibold text-white">In-App Deletion:</p>
                                     <p className="text-sm text-slate-400">Immediate (within seconds)</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full mt-2 flex-shrink-0"></div>
                                 <div>
                                     <p className="text-sm font-semibold text-white">Email Request:</p>
                                     <p className="text-sm text-slate-400">Within 30 days of verification</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-sky-400 rounded-full mt-2 flex-shrink-0"></div>
                                 <div>
                                     <p className="text-sm font-semibold text-white">Backup Systems:</p>
                                     <p className="text-sm text-slate-400">Fully purged within 90 days</p>
@@ -159,8 +159,8 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
 
                     <section>
                         <h3 className="text-lg font-bold text-white mb-3">6. Before You Delete</h3>
-                        <div className="bg-cyan-950/20 border border-cyan-900/50 rounded-lg p-4">
-                            <p className="text-sm font-bold text-cyan-400 mb-2">We recommend:</p>
+                        <div className="bg-sky-950/20 border border-sky-900/50 rounded-lg p-4">
+                            <p className="text-sm font-bold text-sky-400 mb-2">We recommend:</p>
                             <ul className="list-disc list-inside text-sm text-slate-300 space-y-1 ml-4">
                                 <li>Export your data first (Profile → Export Data)</li>
                                 <li>Cancel any active subscriptions (if applicable)</li>
@@ -213,11 +213,11 @@ export function DataDeletionPolicy({ onClose }: DataDeletionPolicyProps) {
                         </p>
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800">
                             <p className="text-sm"><strong>Data Protection Officer:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
+                            <p className="text-sm text-sky-400 mt-1">pvsuryateja99@gmail.com</p>
                             <p className="text-sm mt-3"><strong>Privacy Team:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
+                            <p className="text-sm text-sky-400 mt-1">pvsuryateja99@gmail.com</p>
                             <p className="text-sm mt-3"><strong>Support Team:</strong></p>
-                            <p className="text-sm text-cyan-400 mt-1">pvsuryateja99@gmail.com</p>
+                            <p className="text-sm text-sky-400 mt-1">pvsuryateja99@gmail.com</p>
                         </div>
                     </section>
 

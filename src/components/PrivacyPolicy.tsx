@@ -7,7 +7,7 @@ interface PrivacyPolicyProps {
 export function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="glass-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3">
@@ -213,8 +213,8 @@ export function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
                             If you have questions about this Privacy Policy or wish to exercise your data rights, contact us at:
                         </p>
                         <div className="bg-slate-950/50 p-4 rounded-lg border border-slate-800 mt-3">
-                            <p className="text-sm"><strong>Email:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
-                            <p className="text-sm mt-1"><strong>Data Protection Officer:</strong> <span className="text-cyan-400">pvsuryateja99@gmail.com</span></p>
+                            <p className="text-sm"><strong>Email:</strong> <span className="text-sky-400">pvsuryateja99@gmail.com</span></p>
+                            <p className="text-sm mt-1"><strong>Data Protection Officer:</strong> <span className="text-sky-400">pvsuryateja99@gmail.com</span></p>
                         </div>
                     </section>
 
@@ -230,7 +230,7 @@ export function PrivacyPolicy({ onClose }: PrivacyPolicyProps) {
                 <div className="p-6 border-t border-slate-800 bg-slate-950/50">
                     <button
                         onClick={onClose}
-                        className="w-full bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold py-3 rounded-lg transition-all"
+                        className="w-full bg-gradient-to-r from-emerald-600 to-sky-600 hover:from-emerald-500 hover:to-sky-500 text-white font-bold py-3 rounded-lg transition-all"
                     >
                         I Understand
                     </button>

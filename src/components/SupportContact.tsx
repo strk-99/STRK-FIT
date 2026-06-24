@@ -7,12 +7,12 @@ interface SupportContactProps {
 export function SupportContact({ onClose }: SupportContactProps) {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-            <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="glass-card rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-slate-800">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 bg-cyan-950/30 rounded-lg">
-                            <HelpCircle className="w-6 h-6 text-cyan-400" />
+                        <div className="p-2 bg-sky-950/30 rounded-lg">
+                            <HelpCircle className="w-6 h-6 text-sky-400" />
                         </div>
                         <h2 className="text-2xl font-bold text-white">Support & Contact</h2>
                     </div>
@@ -36,10 +36,10 @@ export function SupportContact({ onClose }: SupportContactProps) {
                     {/* Contact Methods */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* General Support */}
-                        <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-5 hover:border-cyan-500/30 transition-colors">
+                        <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-5 hover:border-sky-500/30 transition-colors">
                             <div className="flex items-start gap-4">
-                                <div className="w-12 h-12 bg-cyan-950/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                                    <Mail className="w-6 h-6 text-cyan-400" />
+                                <div className="w-12 h-12 bg-sky-950/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <Mail className="w-6 h-6 text-sky-400" />
                                 </div>
                                 <div className="flex-1">
                                     <h3 className="text-lg font-bold text-white mb-2">General Support</h3>
@@ -48,7 +48,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     </p>
                                     <a
                                         href="mailto:pvsuryateja99@gmail.com"
-                                        className="text-sm text-cyan-400 hover:text-cyan-300 font-semibold"
+                                        className="text-sm text-sky-400 hover:text-sky-300 font-semibold"
                                     >
                                         pvsuryateja99@gmail.com
                                     </a>
@@ -137,27 +137,27 @@ export function SupportContact({ onClose }: SupportContactProps) {
                         <h3 className="text-lg font-bold text-white mb-4">When Contacting Us, Please Include:</h3>
                         <ul className="space-y-2 text-sm text-slate-300">
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>Your registered email address</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>Device information (iOS/Android, version)</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>App version (found in Profile → Settings)</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>Detailed description of your issue or question</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>Screenshots (if applicable)</span>
                             </li>
                             <li className="flex items-start gap-2">
-                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span className="text-sky-400 mt-0.5">•</span>
                                 <span>Steps to reproduce the issue (for bugs)</span>
                             </li>
                         </ul>
@@ -172,7 +172,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     How do I delete my account?
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
+                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-sky-500/30">
                                     Go to Profile → Data Options → Reset Application. Or email pvsuryateja99@gmail.com
                                     with your deletion request. See our Data Deletion Policy for more details.
                                 </p>
@@ -183,7 +183,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     How do I export my data?
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
+                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-sky-500/30">
                                     Navigate to Profile → Data Options → Export Data. Your fitness data will be
                                     downloaded as a JSON file that you can save and review.
                                 </p>
@@ -194,7 +194,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     Is my data secure?
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
+                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-sky-500/30">
                                     Yes! We use industry-standard encryption (bcrypt for passwords, JWT for
                                     authentication). Your data is stored securely and never sold to third parties.
                                     Read our Privacy Policy for more information.
@@ -206,7 +206,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     Can I use STRK-FIT offline?
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
+                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-sky-500/30">
                                     Some features work offline using local storage, but syncing and cloud backup
                                     require an internet connection. We're working on enhanced offline capabilities.
                                 </p>
@@ -217,7 +217,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                     How do I report a bug?
                                     <span className="text-slate-500 group-open:rotate-180 transition-transform">▼</span>
                                 </summary>
-                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-cyan-500/30">
+                                <p className="text-sm text-slate-400 mt-3 pl-4 border-l-2 border-sky-500/30">
                                     Email pvsuryateja99@gmail.com with detailed information about the bug, including
                                     screenshots and steps to reproduce. We prioritize bug fixes and will respond quickly.
                                 </p>
@@ -226,7 +226,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                     </section>
 
                     {/* Business Hours */}
-                    <section className="bg-cyan-950/20 border border-cyan-900/50 rounded-xl p-5">
+                    <section className="bg-sky-950/20 border border-sky-900/50 rounded-xl p-5">
                         <h3 className="text-lg font-bold text-white mb-3">Support Hours</h3>
                         <div className="space-y-2 text-sm text-slate-300">
                             <div className="flex justify-between">
@@ -241,7 +241,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                 <span className="text-slate-400">Sunday:</span>
                                 <span className="font-semibold">Closed</span>
                             </div>
-                            <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-cyan-900/30">
+                            <p className="text-xs text-slate-500 mt-3 pt-3 border-t border-sky-900/30">
                                 Email support is monitored during business hours. We aim to respond to all inquiries
                                 within our stated response times.
                             </p>
@@ -256,7 +256,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                                 href="https://twitter.com/strkfit"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-2 p-3 bg-slate-950/50 border border-slate-800 rounded-lg hover:border-cyan-500/50 transition-colors text-slate-300 hover:text-cyan-400"
+                                className="flex items-center justify-center gap-2 p-3 bg-slate-950/50 border border-slate-800 rounded-lg hover:border-sky-500/50 transition-colors text-slate-300 hover:text-sky-400"
                             >
                                 <span className="font-semibold">Twitter/X</span>
                             </a>
@@ -287,7 +287,7 @@ export function SupportContact({ onClose }: SupportContactProps) {
                 <div className="p-6 border-t border-slate-800 bg-slate-950/50">
                     <button
                         onClick={onClose}
-                        className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 rounded-lg transition-all"
+                        className="w-full bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold py-3 rounded-lg transition-all"
                     >
                         Close
                     </button>

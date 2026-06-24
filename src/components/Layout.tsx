@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Home, Trophy, User, BookOpen, History, FileText, Menu, X, Settings } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, BookOpen, History, FileText, Menu, X, BarChart2 } from 'lucide-react';
 import { cn } from '../lib/utils';
-
 import logo from '../assets/logo.png';
 
 type TabType = 'home' | 'notes' | 'history' | 'review' | 'profile' | 'resources' | 'settings';
@@ -12,6 +12,22 @@ interface LayoutProps {
     onTabChange: (tab: TabType) => void;
 }
 
+const BOTTOM_TABS = [
+    { id: 'home'      as TabType, icon: Home,     label: 'Today'   },
+    { id: 'notes'     as TabType, icon: FileText,  label: 'Notes'   },
+    { id: 'resources' as TabType, icon: BookOpen,  label: 'Links'   },
+    { id: 'profile'   as TabType, icon: User,      label: 'Profile' },
+] as const;
+
+const SIDEBAR_ITEMS = [
+    { id: 'home'      as TabType, icon: Home,      label: 'Today'         },
+    { id: 'notes'     as TabType, icon: FileText,  label: 'Notes'         },
+    { id: 'resources' as TabType, icon: BookOpen,  label: 'Knowledge Base'},
+    { id: 'history'   as TabType, icon: History,   label: 'History'       },
+    { id: 'review'    as TabType, icon: BarChart2, label: 'Weekly Review' },
+    { id: 'profile'   as TabType, icon: User,      label: 'Profile'       },
+];
+
 export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -21,219 +37,193 @@ export function Layout({ children, currentTab, onTabChange }: LayoutProps) {
     };
 
     return (
-        <div className="h-screen bg-slate-950 flex justify-center text-slate-200 overflow-hidden">
-            <div className="w-full max-w-md bg-slate-950 h-screen relative flex flex-col shadow-2xl shadow-cyan-900/10 border-x border-slate-900">
-                {/* App Header */}
-                <header className="flex-shrink-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg shadow-cyan-900/20" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-                    <div className="px-4 pt-4 pb-0 flex items-center justify-between relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-emerald-500/5 to-cyan-500/5 animate-pulse"></div>
+        <div
+            className="h-screen flex justify-center overflow-hidden"
+            style={{ background: 'linear-gradient(160deg, #050c1e 0%, #080f24 55%, #060a1a 100%)' }}
+        >
+            <div className="w-full max-w-md h-screen relative flex flex-col">
 
-                        <button
+                {/* Ambient background orbs */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div
+                        className="absolute top-[-15%] left-[15%] w-72 h-72 rounded-full"
+                        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%)' }}
+                    />
+                    <div
+                        className="absolute top-[45%] right-[-8%] w-52 h-52 rounded-full"
+                        style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)' }}
+                    />
+                    <div
+                        className="absolute bottom-[15%] left-[-10%] w-44 h-44 rounded-full"
+                        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%)' }}
+                    />
+                </div>
+
+                {/* ── Header ── */}
+                <header
+                    className="flex-shrink-0 z-50 glass-nav border-b"
+                    style={{ paddingTop: 'env(safe-area-inset-top)' }}
+                >
+                    <div className="px-4 py-3 flex items-center justify-between">
+                        <motion.button
+                            whileTap={{ scale: 0.88 }}
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="relative z-20 p-2 text-cyan-400 hover:text-cyan-300 transition-colors"
+                            className="p-2 rounded-xl text-sky-400 hover:bg-white/[0.06] transition-colors"
                         >
-                            <Menu className="w-6 h-6" />
-                        </button>
+                            <Menu className="w-5 h-5" />
+                        </motion.button>
 
-                        <div className="relative z-10 animate-float h-16 flex items-center justify-center overflow-hidden -mb-5">
+                        <div className="h-10 flex items-center justify-center overflow-hidden">
                             <img
                                 src={logo}
                                 alt="STRK-FIT"
-                                className="w-[200px] max-w-none h-auto object-center"
+                                className="w-[155px] h-auto object-contain"
                             />
                         </div>
 
-                        <div className="w-10"></div>
-
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+                        <div className="w-9" />
                     </div>
                 </header>
 
-                {/* Sidebar Overlay */}
-                {sidebarOpen && (
-                    <div
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in"
-                        onClick={() => setSidebarOpen(false)}
-                    />
-                )}
-
-                {/* Sidebar Drawer */}
-                <div
-                    className={cn(
-                        "fixed top-0 left-0 h-full w-72 bg-slate-900 border-r border-slate-800 z-50 transform transition-transform duration-300 ease-in-out shadow-2xl",
-                        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-                    )}
-                    style={{ paddingTop: 'env(safe-area-inset-top)' }}
-                >
-                    <div className="flex items-center justify-between p-4 border-b border-slate-800">
-                        <h2 className="text-lg font-bold text-cyan-400 uppercase tracking-wider">Menu</h2>
-                        <button
+                {/* ── Sidebar overlay ── */}
+                <AnimatePresence>
+                    {sidebarOpen && (
+                        <motion.div
+                            key="overlay"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.18 }}
+                            className="fixed inset-0 bg-black/55 backdrop-blur-sm z-40"
                             onClick={() => setSidebarOpen(false)}
-                            className="p-2 text-slate-400 hover:text-cyan-400 transition-colors"
+                        />
+                    )}
+                </AnimatePresence>
+
+                {/* ── Sidebar drawer ── */}
+                <AnimatePresence>
+                    {sidebarOpen && (
+                        <motion.aside
+                            key="sidebar"
+                            initial={{ x: '-100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '-100%' }}
+                            transition={{ type: 'spring', damping: 30, stiffness: 320 }}
+                            className="fixed top-0 left-0 h-full w-72 z-50 border-r border-white/[0.07]"
+                            style={{
+                                background: 'rgba(5, 12, 30, 0.96)',
+                                backdropFilter: 'blur(32px)',
+                                WebkitBackdropFilter: 'blur(32px)',
+                                paddingTop: 'env(safe-area-inset-top)',
+                            }}
                         >
-                            <X className="w-5 h-5" />
-                        </button>
-                    </div>
+                            <div className="flex items-center justify-between px-4 py-4 border-b border-white/[0.07]">
+                                <span className="text-sm font-bold text-sky-400 tracking-widest uppercase">Menu</span>
+                                <motion.button
+                                    whileTap={{ scale: 0.88 }}
+                                    onClick={() => setSidebarOpen(false)}
+                                    className="p-2 rounded-xl text-slate-400 hover:text-sky-400 hover:bg-white/[0.06] transition-all"
+                                >
+                                    <X className="w-4 h-4" />
+                                </motion.button>
+                            </div>
 
-                    <nav className="p-4 space-y-2">
-                        <div className="space-y-1">
-                            <p className="text-xs text-slate-500 uppercase font-bold px-3 mb-2">Main</p>
-                            <button
-                                onClick={() => handleNavClick('home')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'home'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <Home className="w-5 h-5" />
-                                <span className="font-semibold">Tracker</span>
-                            </button>
+                            <nav className="p-3 space-y-1">
+                                {SIDEBAR_ITEMS.map(({ id, icon: Icon, label }) => {
+                                    const active = currentTab === id;
+                                    return (
+                                        <motion.button
+                                            key={id}
+                                            whileTap={{ scale: 0.97 }}
+                                            onClick={() => handleNavClick(id)}
+                                            className={cn(
+                                                "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all text-left",
+                                                active
+                                                    ? "bg-sky-500/12 text-sky-400 border border-sky-500/20"
+                                                    : "text-slate-400 hover:bg-white/[0.04] hover:text-slate-200"
+                                            )}
+                                        >
+                                            <div className={cn(
+                                                "w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all",
+                                                active ? "bg-sky-500/20" : "bg-white/[0.05]"
+                                            )}>
+                                                <Icon className="w-4 h-4" />
+                                            </div>
+                                            <span className="font-semibold text-sm">{label}</span>
+                                            {active && (
+                                                <motion.span
+                                                    layoutId="sidebar-dot"
+                                                    className="ml-auto w-1.5 h-1.5 rounded-full bg-sky-400"
+                                                />
+                                            )}
+                                        </motion.button>
+                                    );
+                                })}
+                            </nav>
+                        </motion.aside>
+                    )}
+                </AnimatePresence>
 
-                            <button
-                                onClick={() => handleNavClick('notes')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'notes'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <FileText className="w-5 h-5" />
-                                <span className="font-semibold">Notes</span>
-                            </button>
-
-                            <button
-                                onClick={() => handleNavClick('resources')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'resources'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <BookOpen className="w-5 h-5" />
-                                <span className="font-semibold">Knowledge Base</span>
-                            </button>
-                        </div>
-
-                        <div className="pt-4 space-y-1">
-                            <p className="text-xs text-slate-500 uppercase font-bold px-3 mb-2">More</p>
-                            <button
-                                onClick={() => handleNavClick('history')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'history'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <History className="w-5 h-5" />
-                                <span className="font-semibold">History</span>
-                            </button>
-
-                            <button
-                                onClick={() => handleNavClick('review')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'review'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <Trophy className="w-5 h-5" />
-                                <span className="font-semibold">Weekly Review</span>
-                            </button>
-
-                            <button
-                                onClick={() => handleNavClick('settings')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'settings'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <Settings className="w-5 h-5" />
-                                <span className="font-semibold">Settings</span>
-                            </button>
-
-                            <button
-                                onClick={() => handleNavClick('profile')}
-                                className={cn(
-                                    "w-full flex items-center gap-3 px-3 py-3 rounded-lg transition-all",
-                                    currentTab === 'profile'
-                                        ? "bg-cyan-950/50 text-cyan-400 border border-cyan-800/50"
-                                        : "text-slate-400 hover:bg-slate-800 hover:text-cyan-400"
-                                )}
-                            >
-                                <User className="w-5 h-5" />
-                                <span className="font-semibold">Profile</span>
-                            </button>
-                        </div>
-                    </nav>
-                </div>
-
-                {/* Content Area - Scrollable */}
-                <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ paddingBottom: 'calc(6rem + env(safe-area-inset-bottom))' }}>
-                    {children}
+                {/* ── Content area ── */}
+                <main
+                    className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide relative z-10"
+                    style={{ paddingBottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
+                >
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentTab}
+                            initial={{ opacity: 0, y: 12 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            {children}
+                        </motion.div>
+                    </AnimatePresence>
                 </main>
 
-                {/* Bottom Navigation - 4 Primary Tabs */}
-                <div className="fixed bottom-0 w-full max-w-md bg-slate-950/90 backdrop-blur-md border-t border-slate-800 px-2 pt-3 flex justify-around z-40" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
-                    <button
-                        onClick={() => onTabChange('home')}
-                        className={cn(
-                            "flex flex-col items-center gap-1 transition-all px-3 py-2 rounded-lg flex-1",
-                            currentTab === 'home'
-                                ? "text-cyan-400 bg-cyan-950/30 border border-cyan-800/50"
-                                : "text-slate-500 hover:text-slate-300"
-                        )}
-                    >
-                        <Home className="w-5 h-5" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Tracker</span>
-                    </button>
-
-                    <button
-                        onClick={() => onTabChange('notes')}
-                        className={cn(
-                            "flex flex-col items-center gap-1 transition-all px-3 py-2 rounded-lg flex-1",
-                            currentTab === 'notes'
-                                ? "text-cyan-400 bg-cyan-950/30 border border-cyan-800/50"
-                                : "text-slate-500 hover:text-slate-300"
-                        )}
-                    >
-                        <FileText className="w-5 h-5" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Notes</span>
-                    </button>
-
-                    <button
-                        onClick={() => onTabChange('resources')}
-                        className={cn(
-                            "flex flex-col items-center gap-1 transition-all px-3 py-2 rounded-lg flex-1",
-                            currentTab === 'resources'
-                                ? "text-cyan-400 bg-cyan-950/30 border border-cyan-800/50"
-                                : "text-slate-500 hover:text-slate-300"
-                        )}
-                    >
-                        <BookOpen className="w-5 h-5" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">KB</span>
-                    </button>
-
-                    <button
-                        onClick={() => onTabChange('profile')}
-                        className={cn(
-                            "flex flex-col items-center gap-1 transition-all px-3 py-2 rounded-lg flex-1",
-                            currentTab === 'profile'
-                                ? "text-cyan-400 bg-cyan-950/30 border border-cyan-800/50"
-                                : "text-slate-500 hover:text-slate-300"
-                        )}
-                    >
-                        <User className="w-5 h-5" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Profile</span>
-                    </button>
+                {/* ── Bottom navigation ── */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 z-40 glass-nav border-t"
+                    style={{ paddingBottom: 'calc(0.6rem + env(safe-area-inset-bottom))' }}
+                >
+                    <div className="flex justify-around items-end pt-2 px-2">
+                        {BOTTOM_TABS.map(({ id, icon: Icon, label }) => {
+                            const active = currentTab === id;
+                            return (
+                                <motion.button
+                                    key={id}
+                                    whileTap={{ scale: 0.88 }}
+                                    onClick={() => onTabChange(id)}
+                                    className="relative flex flex-col items-center gap-0.5 flex-1 pb-1"
+                                >
+                                    {active && (
+                                        <motion.div
+                                            layoutId="tab-pill"
+                                            className="absolute -top-px left-1/2 -translate-x-1/2 w-8 h-[2.5px] rounded-full bg-sky-400"
+                                            style={{ boxShadow: '0 0 10px rgba(56,189,248,0.8)' }}
+                                        />
+                                    )}
+                                    <div className={cn(
+                                        "w-11 h-10 rounded-2xl flex items-center justify-center transition-all duration-200",
+                                        active
+                                            ? "bg-sky-500/15 text-sky-400"
+                                            : "text-slate-500"
+                                    )}>
+                                        <Icon className={cn("transition-all duration-200", active ? "w-[22px] h-[22px]" : "w-5 h-5")} />
+                                    </div>
+                                    <span className={cn(
+                                        "text-[10px] font-semibold tracking-wide transition-all duration-200",
+                                        active ? "text-sky-400" : "text-slate-600"
+                                    )}>
+                                        {label}
+                                    </span>
+                                </motion.button>
+                            );
+                        })}
+                    </div>
                 </div>
+
             </div>
         </div>
     );
