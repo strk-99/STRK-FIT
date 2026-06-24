@@ -7,7 +7,7 @@ import {
 } from 'date-fns';
 import {
     Trophy, ChevronLeft, ChevronRight, Flame,
-    Award, Crown, Sparkles, Moon, Scale, Utensils, CheckCircle2, X
+    Award, Moon, Scale, Utensils, X
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 
@@ -119,49 +119,12 @@ export function WeeklyReview() {
         const avgWater = totalDays > 0 ? Math.round(totalWater / totalDays) : 0;
         const avgSleep = totalDays > 0 ? Number((totalSleep / totalDays).toFixed(1)) : 0;
 
-        // Calculate grade
+        // Consistency score
         let score = 0;
         score += workoutPercentage * 0.4;
-        score += (totalSleep > (totalDays * 7) ? 100 : (totalSleep / (totalDays * 8)) * 100) * 0.2; // Sleep factor
+        score += (totalSleep > (totalDays * 7) ? 100 : (totalSleep / (totalDays * 8)) * 100) * 0.2;
         score += (highProteinDays / totalDays) * 100 * 0.2;
         score += Math.min((avgSteps / 10000) * 100, 100) * 0.2;
-
-        let grade: 'S' | 'A' | 'B' | 'C' | 'D' | 'F' = 'F';
-        let title = '';
-        let message = '';
-        let emoji = '';
-
-        if (score >= 95) {
-            grade = 'S';
-            title = 'LEGENDARY';
-            message = "You're an absolute beast! Keep dominating!";
-            emoji = '👑';
-        } else if (score >= 85) {
-            grade = 'A';
-            title = 'OUTSTANDING';
-            message = "Incredible work! You're crushing your goals!";
-            emoji = '⭐';
-        } else if (score >= 70) {
-            grade = 'B';
-            title = 'GREAT WORK';
-            message = "Solid progress! Keep pushing forward!";
-            emoji = '💪';
-        } else if (score >= 55) {
-            grade = 'C';
-            title = 'MAKING PROGRESS';
-            message = "Good effort! Let's level up next time!";
-            emoji = '📈';
-        } else if (score >= 35) {
-            grade = 'D';
-            title = 'NEEDS IMPROVEMENT';
-            message = "You can do better! Small steps matter!";
-            emoji = '💫';
-        } else {
-            grade = 'F';
-            title = 'TIME TO RESET';
-            message = "Fresh start! Every champion has setbacks!";
-            emoji = '🔄';
-        }
 
         return {
             start,
@@ -177,10 +140,6 @@ export function WeeklyReview() {
             foodEntries,
             latestWeight,
             weightChange,
-            grade,
-            title,
-            message,
-            emoji,
             score: Math.round(score),
             moodCounts,
         };
@@ -252,17 +211,6 @@ export function WeeklyReview() {
         }
         return `${format(stats.start, 'MMM d')} - ${format(stats.end, 'MMM d, yyyy')}`;
     };
-
-    const gradeColors = {
-        'S': { bg: 'from-purple-600/20 via-pink-600/20 to-purple-600/20', border: 'border-purple-500', text: 'text-purple-400', glow: 'shadow-purple-500/50' },
-        'A': { bg: 'from-emerald-600/20 via-cyan-600/20 to-emerald-600/20', border: 'border-emerald-500', text: 'text-emerald-400', glow: 'shadow-emerald-500/30' },
-        'B': { bg: 'from-cyan-600/20 to-blue-600/20', border: 'border-cyan-500', text: 'text-cyan-400', glow: 'shadow-cyan-500/30' },
-        'C': { bg: 'from-yellow-600/20 to-amber-600/20', border: 'border-yellow-500', text: 'text-yellow-400', glow: 'shadow-yellow-500/20' },
-        'D': { bg: 'from-orange-600/20 to-amber-600/20', border: 'border-orange-500', text: 'text-orange-400', glow: 'shadow-orange-500/20' },
-        'F': { bg: 'from-slate-800/50 to-slate-900/50', border: 'border-slate-700', text: 'text-slate-400', glow: 'shadow-slate-500/10' }
-    };
-
-    const colors = gradeColors[stats.grade];
 
     return (
         <div className="p-4 space-y-6 pb-24 animate-fade-up">
@@ -363,55 +311,22 @@ export function WeeklyReview() {
                 </div>
             )}
 
-            {/* Grade Card */}
-            <div className={cn(
-                "relative p-8 rounded-2xl border-2 overflow-hidden bg-gradient-to-br shadow-2xl",
-                colors.bg,
-                colors.border,
-                colors.glow
-            )}>
-                {/* Decorative background */}
-                {stats.grade === 'S' && (
-                    <div className="absolute inset-0 overflow-hidden">
-                        <Sparkles className="absolute top-4 right-4 w-6 h-6 text-purple-400 animate-pulse" />
-                        <Sparkles className="absolute bottom-4 left-4 w-4 h-4 text-pink-400 animate-pulse" style={{ animationDelay: '0.5s' }} />
-                        <Crown className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 text-purple-500/10" />
-                    </div>
-                )}
-
-                <div className="relative z-10 flex flex-col items-center gap-4">
-                    <div className="text-6xl">{stats.emoji}</div>
-
-                    <div className="text-center">
-                        <div className={cn("text-9xl font-black font-mono", colors.text)}>
-                            {stats.grade}
-                        </div>
-                        <div className={cn("text-xs font-bold uppercase tracking-widest mt-2", colors.text)}>
-                            {stats.title}
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-950/50 backdrop-blur-sm rounded-lg px-4 py-2 border border-slate-800/50">
-                        <p className="text-sm text-slate-300 text-center">{stats.message}</p>
-                    </div>
-
-                    {/* Score bar */}
-                    <div className="w-full max-w-xs">
-                        <div className="flex items-center justify-between text-xs text-slate-500 mb-1">
-                            <span>Overall Score</span>
-                            <span className={cn("font-bold", colors.text)}>{stats.score}%</span>
-                        </div>
-                        <div className="h-2 bg-slate-950/50 rounded-full overflow-hidden">
-                            <div
-                                className={cn("h-full rounded-full transition-all duration-1000 bg-gradient-to-r", colors.text.replace('text-', 'from-'), 'to-transparent')}
-                                style={{ width: `${stats.score}%` }}
-                            />
-                        </div>
-                    </div>
+            {/* Consistency Score */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-3">
+                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Consistency Score</p>
+                    <p className="text-2xl font-bold text-cyan-400">{stats.score}%</p>
                 </div>
+                <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-700"
+                        style={{ width: `${stats.score}%` }}
+                    />
+                </div>
+                <p className="text-xs text-slate-600 mt-2">Based on workouts, steps, protein & sleep</p>
             </div>
 
-            {/* Stats Grid - 5 items: Exercise, Food, Water, Sleep, Weight */}
+            {/* Stats Grid */}
             <div className="space-y-3">
 
                 {/* Top Row: Exercise & Food */}
@@ -503,39 +418,6 @@ export function WeeklyReview() {
                 </div>
             )}
 
-            {/* Motivational footer */}
-            <div className="text-center pt-4">
-                {stats.grade === 'S' && (
-                    <p className="text-sm font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        You're a LEGEND! Keep dominating! 👑
-                    </p>
-                )}
-                {stats.grade === 'A' && (
-                    <p className="text-sm font-bold text-emerald-400">
-                        Outstanding performance! You're unstoppable! ⭐
-                    </p>
-                )}
-                {stats.grade === 'B' && (
-                    <p className="text-sm font-bold text-cyan-400">
-                        Great work! Push a bit harder for excellence! 💪
-                    </p>
-                )}
-                {stats.grade === 'C' && (
-                    <p className="text-sm text-yellow-400">
-                        Solid effort! Consistency will take you to the top! 📈
-                    </p>
-                )}
-                {stats.grade === 'D' && (
-                    <p className="text-sm text-orange-400">
-                        Keep going! Small improvements add up! 💫
-                    </p>
-                )}
-                {stats.grade === 'F' && (
-                    <p className="text-sm text-slate-400">
-                        New day, new opportunity! Champions rise after setbacks! 🔄
-                    </p>
-                )}
-            </div>
         </div>
     );
 }

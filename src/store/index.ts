@@ -71,13 +71,6 @@ export interface WeightEntry {
     weight: number;
 }
 
-export interface Achievement {
-    id: string;
-    name: string;
-    description: string;
-    unlockedAt: string;
-}
-
 export interface ResourceLink {
     id: string;
     title: string;
@@ -117,8 +110,6 @@ export interface UserProfile {
     startWeight: number;
     currentWeight: number;
     targetWeight: number;
-    level: number;
-    xp: number;
     reminderEnabled: boolean;
     reminderTime: string;
     monthlyDownloadEnabled: boolean;
@@ -137,7 +128,6 @@ interface AppState {
     shiftHistory: Record<string, DayShiftState>;
     logs: Record<string, DailyLog>;
     weightHistory: WeightEntry[];
-    achievements: Achievement[];
     resources: ResourceLink[];
     notes: Note[];
     habits: Habit[];
@@ -188,7 +178,6 @@ export const useStore = create<AppState>()(
             shiftHistory: {},
             logs: {},
             weightHistory: [],
-            achievements: [],
             resources: [],
             notes: [],
             habits: DEFAULT_HABITS,

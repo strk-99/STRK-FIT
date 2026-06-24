@@ -4,7 +4,7 @@ import { useStore, type MealType, type PriorityLevel, type ReminderRepeat, type 
 import { scheduleTaskReminder, cancelTaskReminder } from '../lib/notifications';
 import { isPedometerAvailable, startPedometer } from '../lib/pedometer';
 import { ShiftSelector } from './ShiftSelector';
-import { calculateUserLevel } from '../lib/gamification';
+import { calculateIntegrityStreak } from '../lib/gamification';
 import { cn } from '../lib/utils';
 import {
     Plus, Trash2, CheckCircle2, Circle, Clock,
@@ -190,7 +190,7 @@ export function TodayPage() {
         habits, toggleHabit, updateHabitEntry, addHabit, removeHabit, setMood,
         weeklyIntentions, setWeeklyIntention,
     } = useStore();
-    const { progress } = calculateUserLevel(logs);
+    const { currentStreak } = calculateIntegrityStreak(logs, shiftHistory);
 
     // ── Calendar ─────────────────────────────────────────────────────────────
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -398,7 +398,7 @@ export function TodayPage() {
                         <span className="text-[10px] text-slate-500 uppercase font-bold">Streak</span>
                         <div className="flex items-center gap-1.5 text-cyan-400 font-mono font-bold">
                             <Trophy className="w-3 h-3" />
-                            <span>{Math.floor(progress)}</span>
+                            <span>{currentStreak}</span>
                         </div>
                     </div>
                 </div>

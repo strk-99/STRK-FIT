@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { WeightTracker } from './WeightTracker';
 import {
     User as UserIcon,
@@ -8,24 +8,18 @@ import {
     Trash2,
     Info,
     CheckCircle2,
-    Circle,
-    Lock,
     Save,
     Settings,
     Bell,
     Calendar,
     Pencil,
-    Trophy,
 } from 'lucide-react';
-import { useStore, type DailyLog } from '../store';
+import { useStore } from '../store';
 import {
-    calculateUserLevel,
     calculateIntegrityStreak,
     getRightNowFocus,
     getWeeklySnapshot,
     getNextCheckInDays,
-    LEVEL_DESCRIPTIONS,
-    UNLOCK_CRITERIA
 } from '../lib/gamification';
 import { exportUserDataToCSV } from '../lib/data-export';
 
@@ -35,42 +29,10 @@ interface UserProfileProps {
 
 export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
     const { logs, profile, shiftHistory, weightHistory, setProfile, updateProfile } = useStore();
-    const { level, title } = profile ? calculateUserLevel(logs) : { level: 1, title: 'Survivor' };
     const { currentStreak, bestStreak } = calculateIntegrityStreak(logs, shiftHistory);
     const focusItems = getRightNowFocus(logs, shiftHistory);
     const snapshot = getWeeklySnapshot(logs, shiftHistory);
     const nextCheckIn = getNextCheckInDays(weightHistory);
-
-    const achievements = useMemo(() => {
-        const logEntries = Object.values(logs) as DailyLog[];
-        const totalDays = logEntries.length;
-        const workoutDays = logEntries.filter(l => l.workoutDone).length;
-        const journalDays = logEntries.filter(l => l.dailyJournal?.trim()).length;
-        const hydrationDays = logEntries.filter(l => (l.water || 0) >= 8).length;
-        const sleepDays = logEntries.filter(l => (l.sleep || 0) >= 7).length;
-        const foodDays = logEntries.reduce((sum, l) => sum + (l.foodLog?.length || 0), 0);
-        const habitPerfectDays = logEntries.filter(l =>
-            l.habitLog && Object.values(l.habitLog).length > 0 && Object.values(l.habitLog).every(Boolean)
-        ).length;
-
-        const list = [
-            { id: 'first_log',      emoji: '🗓️',  name: 'First Step',        desc: 'Logged your first day',              done: totalDays >= 1    },
-            { id: 'workout_10',     emoji: '💪',  name: 'Workout Warrior',    desc: '10 workout days logged',             done: workoutDays >= 10 },
-            { id: 'workout_30',     emoji: '🏋️',  name: 'Iron Will',          desc: '30 workout days logged',             done: workoutDays >= 30 },
-            { id: 'streak_7',       emoji: '🔥',  name: '7-Day Streak',       desc: '7 consecutive days logged',          done: currentStreak >= 7  },
-            { id: 'streak_30',      emoji: '👑',  name: 'Unstoppable',        desc: '30-day streak achieved',             done: bestStreak >= 30   },
-            { id: 'hydration_7',    emoji: '💧',  name: 'Hydration Hero',     desc: '8+ glasses on 7 different days',     done: hydrationDays >= 7 },
-            { id: 'sleep_10',       emoji: '😴',  name: 'Rest Master',        desc: '7+ hours sleep on 10 days',          done: sleepDays >= 10    },
-            { id: 'food_20',        emoji: '🥗',  name: 'Meal Tracker',       desc: '20+ food entries logged total',       done: foodDays >= 20     },
-            { id: 'journal_10',     emoji: '📓',  name: 'Journal Keeper',     desc: '10 days with journal entries',        done: journalDays >= 10  },
-            { id: 'habit_perfect',  emoji: '⭐',  name: 'Perfect Day',        desc: 'All habits completed in one day',    done: habitPerfectDays >= 1  },
-            { id: 'weight_logged',  emoji: '⚖️',  name: 'Data Driven',        desc: 'Logged first weight entry',          done: weightHistory.length >= 1 },
-            { id: 'weight_5',       emoji: '🎯',  name: 'Weight Journey',     desc: '5+ weight entries recorded',         done: weightHistory.length >= 5 },
-        ];
-        return list;
-    }, [logs, weightHistory, currentStreak, bestStreak]);
-
-    const [showLevelTooltip, setShowLevelTooltip] = useState(false);
     const [showProfileForm, setShowProfileForm] = useState(!profile);
 
     const [formData, setFormData] = useState({
@@ -96,8 +58,6 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
             startWeight: profile?.startWeight || parseFloat(formData.currentWeight) || 0,
             currentWeight: parseFloat(formData.currentWeight) || 0,
             targetWeight: parseFloat(formData.targetWeight) || 0,
-            level: profile?.level || 1,
-            xp: profile?.xp || 0,
             reminderEnabled: formData.reminderEnabled,
             reminderTime: formData.reminderTime,
             monthlyDownloadEnabled: formData.monthlyDownloadEnabled
@@ -377,25 +337,9 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                         </div>
                         <div className="flex-1">
                             <h2 className="text-2xl font-bold text-white tracking-wide mb-1">{profile.name}</h2>
-                            <div className="flex items-center gap-2 text-cyan-400 text-sm font-bold">
-                                <span>Level {level}: {title}</span>
-                                <button
-                                    onClick={() => setShowLevelTooltip(!showLevelTooltip)}
-                                    className="relative"
-                                >
-                                    <Info className="w-3.5 h-3.5 text-slate-500 hover:text-cyan-400 transition-colors" />
-                                </button>
-                            </div>
+                            <p className="text-xs text-slate-500">{profile.age} yrs &middot; {profile.height} cm</p>
                         </div>
                     </div>
-
-                    {/* Tooltip */}
-                    {showLevelTooltip && (
-                        <div className="mb-4 p-3 bg-slate-950 border border-cyan-500/30 rounded-lg text-xs text-slate-300">
-                            <p className="font-bold text-cyan-400 mb-1">{title}</p>
-                            <p>{LEVEL_DESCRIPTIONS[level]}</p>
-                        </div>
-                    )}
 
                     <p className="text-sm text-slate-400 italic">
                         "Still showing up. That's enough for today."
@@ -543,118 +487,7 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                 </div>
             </div>
 
-            {/* SECTION 4: JOURNEY LEVELS */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-widest px-1">
-                    <Target className="w-4 h-4" />
-                    Journey Levels
-                </div>
-
-                <div className="space-y-2">
-                    {/* Level 1: Survivor */}
-                    <div className={`p-4 rounded-lg border transition-all ${level === 1
-                        ? 'bg-cyan-950/20 border-cyan-500/50'
-                        : level > 1
-                            ? 'bg-slate-900 border-slate-800'
-                            : 'bg-slate-900 border-slate-800'
-                        }`}>
-                        <div className="flex items-start justify-between">
-                            <div className="flex items-start gap-3">
-                                {level >= 1 ? (
-                                    <CheckCircle2 className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
-                                ) : (
-                                    <Circle className="w-5 h-5 text-slate-700 mt-0.5 flex-shrink-0" />
-                                )}
-                                <div>
-                                    <div className="font-bold text-white mb-1">
-                                        Level 1: Survivor
-                                    </div>
-                                    <p className="text-xs text-slate-400">
-                                        Learning to show up
-                                    </p>
-                                </div>
-                            </div>
-                            {level === 1 && (
-                                <span className="text-[10px] font-bold text-cyan-400 px-2 py-1 bg-cyan-950 rounded-full whitespace-nowrap">
-                                    CURRENT
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Level 2: Architect */}
-                    <div className={`p-4 rounded-lg border transition-all ${level === 2
-                        ? 'bg-cyan-950/20 border-cyan-500/50'
-                        : level > 2
-                            ? 'bg-slate-900 border-slate-800'
-                            : 'bg-slate-900/50 border-slate-800/50'
-                        }`}>
-                        <div className="flex items-start justify-between">
-                            <div className="flex items-start gap-3">
-                                {level >= 2 ? (
-                                    <CheckCircle2 className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
-                                ) : (
-                                    <Lock className="w-5 h-5 text-slate-700 mt-0.5 flex-shrink-0" />
-                                )}
-                                <div>
-                                    <div className={`font-bold mb-1 ${level >= 2 ? 'text-white' : 'text-slate-500'}`}>
-                                        Level 2: Architect
-                                    </div>
-                                    <p className="text-xs text-slate-400 mb-2">
-                                        Building a routine that fits your life
-                                    </p>
-                                    {level < 2 && (
-                                        <p className="text-xs text-slate-600 italic">
-                                            {UNLOCK_CRITERIA[2]}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                            {level === 2 && (
-                                <span className="text-[10px] font-bold text-cyan-400 px-2 py-1 bg-cyan-950 rounded-full whitespace-nowrap">
-                                    CURRENT
-                                </span>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Level 3: In Control */}
-                    <div className={`p-4 rounded-lg border transition-all ${level === 3
-                        ? 'bg-cyan-950/20 border-cyan-500/50'
-                        : 'bg-slate-900/50 border-slate-800/50'
-                        }`}>
-                        <div className="flex items-start justify-between">
-                            <div className="flex items-start gap-3">
-                                {level >= 3 ? (
-                                    <CheckCircle2 className="w-5 h-5 text-cyan-500 mt-0.5 flex-shrink-0" />
-                                ) : (
-                                    <Lock className="w-5 h-5 text-slate-700 mt-0.5 flex-shrink-0" />
-                                )}
-                                <div>
-                                    <div className={`font-bold mb-1 ${level >= 3 ? 'text-white' : 'text-slate-500'}`}>
-                                        Level 3: In Control
-                                    </div>
-                                    <p className="text-xs text-slate-400 mb-2">
-                                        Food, movement, and sleep aligned
-                                    </p>
-                                    {level < 3 && (
-                                        <p className="text-xs text-slate-600 italic">
-                                            {UNLOCK_CRITERIA[3]}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                            {level === 3 && (
-                                <span className="text-[10px] font-bold text-cyan-400 px-2 py-1 bg-cyan-950 rounded-full whitespace-nowrap">
-                                    CURRENT
-                                </span>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* SECTION 5: "RIGHT NOW" FOCUS */}
+            {/* SECTION 4: "RIGHT NOW" FOCUS */}
             <div className="bg-gradient-to-br from-cyan-950/20 to-slate-900 border border-cyan-500/30 p-5 rounded-xl">
                 <div className="text-sm font-bold text-cyan-400 mb-3 tracking-wide">
                     Right now, focus on:
@@ -710,39 +543,6 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                 <p className="text-sm text-slate-500 italic border-t border-slate-800/50 pt-3">
                     Still in the game.
                 </p>
-            </div>
-
-            {/* SECTION 8: ACHIEVEMENTS */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-widest px-1">
-                    <Trophy className="w-4 h-4 text-amber-500" />
-                    Achievements
-                    <span className="ml-auto text-amber-400 font-bold">
-                        {achievements.filter(a => a.done).length}/{achievements.length}
-                    </span>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2">
-                    {achievements.map(a => (
-                        <div key={a.id}
-                            className={`p-3 rounded-xl border transition-all ${
-                                a.done
-                                    ? 'bg-amber-950/20 border-amber-700/40'
-                                    : 'bg-slate-900/40 border-slate-800/50 opacity-50'
-                            }`}>
-                            <div className="flex items-start gap-2">
-                                <span className={`text-xl leading-none ${!a.done && 'grayscale'}`}>{a.emoji}</span>
-                                <div className="flex-1 min-w-0">
-                                    <p className={`text-xs font-bold leading-tight ${a.done ? 'text-amber-300' : 'text-slate-500'}`}>
-                                        {a.name}
-                                    </p>
-                                    <p className="text-[10px] text-slate-600 leading-tight mt-0.5">{a.desc}</p>
-                                </div>
-                                {a.done && <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />}
-                            </div>
-                        </div>
-                    ))}
-                </div>
             </div>
 
             {/* USEFUL OPTIONS */}
