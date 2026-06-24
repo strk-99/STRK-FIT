@@ -9,8 +9,8 @@ import {
   saveNotificationSettings,
 } from './lib/notifications';
 import { Layout } from './components/Layout';
-import { DailyCard } from './components/DailyCard';
-import { CalendarView } from './components/CalendarView';
+import { TodayPage } from './components/TodayPage';
+import { NotesPage } from './components/NotesPage';
 import { WeeklyReview } from './components/WeeklyReview';
 import { UserProfile } from './components/UserProfile';
 import { SettingsPage } from './components/SettingsPage';
@@ -20,7 +20,7 @@ import { WelcomeScreen } from './components/WelcomeScreen';
 
 export default function App() {
   const { profile, logs } = useStore();
-  const [tab, setTab] = useState<'home' | 'calendar' | 'history' | 'review' | 'profile' | 'resources' | 'settings'>('home');
+  const [tab, setTab] = useState<'home' | 'notes' | 'history' | 'review' | 'profile' | 'resources' | 'settings'>('home');
   const [showWelcome, setShowWelcome] = useState(true);
 
   // Initialize notification channel and listeners once on mount
@@ -74,10 +74,8 @@ export default function App() {
 
 
 
-  // Show settings page as full screen (no layout)
-  if (tab === 'settings') {
-    return <SettingsPage onBack={() => setTab('profile')} />;
-  }
+  // Show settings page within layout
+  // (No longer full screen - integrated with sidebar navigation)
 
   // If no profile exists, show profile page to set up
   if (!profile) {
@@ -91,12 +89,13 @@ export default function App() {
   // Show main app
   return (
     <Layout currentTab={tab} onTabChange={setTab}>
-      {tab === 'home' && <DailyCard />}
-      {tab === 'calendar' && <CalendarView />}
-      {tab === 'history' && <DailyHistory />}
-      {tab === 'review' && <WeeklyReview />}
-      {tab === 'profile' && <UserProfile onOpenSettings={() => setTab('settings')} />}
+      {tab === 'home'      && <TodayPage />}
+      {tab === 'notes'     && <NotesPage />}
+      {tab === 'history'   && <DailyHistory />}
+      {tab === 'review'    && <WeeklyReview />}
+      {tab === 'profile'   && <UserProfile onOpenSettings={() => setTab('settings')} />}
       {tab === 'resources' && <ResourceHub />}
+      {tab === 'settings'  && <SettingsPage onBack={() => setTab('profile')} />}
     </Layout>
   );
 }

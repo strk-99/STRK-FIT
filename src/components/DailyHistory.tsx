@@ -74,10 +74,10 @@ export function DailyHistory() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                        <Calendar className="w-6 h-6 text-cyan-400" />
+                        <Calendar className="w-6 h-6 text-white" />
                         Daily History
                     </h1>
-                    <p className="text-sm text-slate-500 mt-1">Your complete activity timeline</p>
+                    <p className="text-sm text-white/35 mt-1">Your complete activity timeline</p>
                 </div>
             </div>
 
@@ -87,8 +87,8 @@ export function DailyHistory() {
                     onClick={() => setDaysToShow(30)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                         daysToShow === 30
-                            ? 'bg-cyan-600 text-white'
-                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-white/[0.12] text-white'
+                            : 'bg-white/10 text-white/50 hover:bg-white/[0.13]'
                     }`}
                 >
                     30 Days
@@ -97,8 +97,8 @@ export function DailyHistory() {
                     onClick={() => setDaysToShow(90)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                         daysToShow === 90
-                            ? 'bg-cyan-600 text-white'
-                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-white/[0.12] text-white'
+                            : 'bg-white/10 text-white/50 hover:bg-white/[0.13]'
                     }`}
                 >
                     90 Days
@@ -107,8 +107,8 @@ export function DailyHistory() {
                     onClick={() => setDaysToShow(180)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                         daysToShow === 180
-                            ? 'bg-cyan-600 text-white'
-                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-white/[0.12] text-white'
+                            : 'bg-white/10 text-white/50 hover:bg-white/[0.13]'
                     }`}
                 >
                     6 Months
@@ -117,25 +117,25 @@ export function DailyHistory() {
                     onClick={() => setDaysToShow(365)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                         daysToShow === 365
-                            ? 'bg-cyan-600 text-white'
-                            : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            ? 'bg-white/[0.12] text-white'
+                            : 'bg-white/10 text-white/50 hover:bg-white/[0.13]'
                     }`}
                 >
                     1 Year
                 </button>
             </div>
 
-            <div className="text-xs text-slate-500">
+            <div className="text-xs text-white/35">
                 Showing {datesWithData.length} days with activity out of {daysToShow} days
             </div>
 
             {/* Timeline */}
             <div className="space-y-3">
                 {datesWithData.length === 0 ? (
-                    <div className="text-center py-12 border border-dashed border-slate-800 rounded-xl bg-slate-950/30">
-                        <Calendar className="w-12 h-12 text-slate-700 mx-auto mb-3" />
-                        <p className="text-slate-500 text-sm">No activity logged yet</p>
-                        <p className="text-slate-600 text-xs mt-1">Start logging your daily activities to see your history</p>
+                    <div className="text-center py-12 border border-dashed border-white/10 rounded-xl bg-black/30">
+                        <Calendar className="w-12 h-12 text-white/15 mx-auto mb-3" />
+                        <p className="text-white/35 text-sm">No activity logged yet</p>
+                        <p className="text-white/20 text-xs mt-1">Start logging your daily activities to see your history</p>
                     </div>
                 ) : (
                     datesWithData.map(date => {
@@ -150,12 +150,12 @@ export function DailyHistory() {
                         return (
                             <div
                                 key={date}
-                                className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-colors"
+                                className="bg-white/[0.06] border border-white/10 rounded-xl overflow-hidden hover:border-white/[0.15] transition-colors"
                             >
                                 {/* Header - Always visible */}
                                 <button
                                     onClick={() => toggleExpanded(date)}
-                                    className="w-full p-4 flex items-center justify-between hover:bg-slate-800/50 transition-colors"
+                                    className="w-full p-4 flex items-center justify-between hover:bg-white/[0.07] transition-colors"
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="text-left">
@@ -164,13 +164,13 @@ export function DailyHistory() {
                                             </div>
                                             <div className="flex items-center gap-2 mt-1">
                                                 {shift && (
-                                                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                                                    <div className="flex items-center gap-1 text-xs text-white/50">
                                                         {getShiftIcon(shift.shift)}
                                                         <span>{shift.shift}</span>
                                                     </div>
                                                 )}
                                                 {shift && (
-                                                    <div className="flex items-center gap-1 text-xs text-slate-400">
+                                                    <div className="flex items-center gap-1 text-xs text-white/50">
                                                         {getLocationIcon(shift.location)}
                                                         <span>{shift.location}</span>
                                                     </div>
@@ -187,30 +187,30 @@ export function DailyHistory() {
                                             </div>
                                         )}
                                         {weight && (
-                                            <div className="px-2 py-1 bg-cyan-950/30 rounded-md">
-                                                <Scale className="w-4 h-4 text-cyan-400" />
+                                            <div className="px-2 py-1 bg-white/[0.06] rounded-md">
+                                                <Scale className="w-4 h-4 text-white" />
                                             </div>
                                         )}
                                         {isExpanded ? (
-                                            <ChevronUp className="w-5 h-5 text-slate-500" />
+                                            <ChevronUp className="w-5 h-5 text-white/35" />
                                         ) : (
-                                            <ChevronDown className="w-5 h-5 text-slate-500" />
+                                            <ChevronDown className="w-5 h-5 text-white/35" />
                                         )}
                                     </div>
                                 </button>
 
                                 {/* Expanded details */}
                                 {isExpanded && (
-                                    <div className="px-4 pb-4 space-y-3 border-t border-slate-800">
+                                    <div className="px-4 pb-4 space-y-3 border-t border-white/10">
                                         {/* Weight */}
                                         {weight && (
                                             <div className="pt-3">
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Scale className="w-3.5 h-3.5" />
                                                     Weight
                                                 </div>
-                                                <div className="text-2xl font-mono text-cyan-400 font-bold">
-                                                    {weight.weight} <span className="text-sm text-slate-600">kg</span>
+                                                <div className="text-2xl font-mono text-white font-bold">
+                                                    {weight.weight} <span className="text-sm text-white/20">kg</span>
                                                 </div>
                                             </div>
                                         )}
@@ -218,7 +218,7 @@ export function DailyHistory() {
                                         {/* Workout */}
                                         {log?.workoutDone && (
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Dumbbell className="w-3.5 h-3.5" />
                                                     Workout Completed
                                                 </div>
@@ -227,9 +227,9 @@ export function DailyHistory() {
                                                         {log.exercises.map((ex, i) => (
                                                             <div
                                                                 key={i}
-                                                                className="flex items-center justify-between p-2 bg-slate-950 rounded-lg"
+                                                                className="flex items-center justify-between p-2 bg-black rounded-lg"
                                                             >
-                                                                <span className="text-sm text-slate-300">{ex.name}</span>
+                                                                <span className="text-sm text-white/70">{ex.name}</span>
                                                                 <span className="text-xs font-mono text-emerald-400">{ex.count}</span>
                                                             </div>
                                                         ))}
@@ -241,7 +241,7 @@ export function DailyHistory() {
                                         {/* Steps */}
                                         {log && log.steps > 0 && (
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Footprints className="w-3.5 h-3.5" />
                                                     Steps
                                                 </div>
@@ -254,12 +254,12 @@ export function DailyHistory() {
                                         {/* Water */}
                                         {log && log.water && log.water > 0 && (
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Droplet className="w-3.5 h-3.5" />
                                                     Water
                                                 </div>
                                                 <div className="text-xl font-mono text-blue-400 font-bold">
-                                                    {log.water} <span className="text-sm text-slate-600">glasses</span>
+                                                    {log.water} <span className="text-sm text-white/20">glasses</span>
                                                 </div>
                                             </div>
                                         )}
@@ -267,14 +267,14 @@ export function DailyHistory() {
                                         {/* Protein */}
                                         {log && log.proteinEst && (
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Apple className="w-3.5 h-3.5" />
                                                     Protein Intake
                                                 </div>
                                                 <div className={`inline-flex px-3 py-1.5 rounded-full text-sm font-bold ${
                                                     log.proteinEst === 'high' ? 'bg-emerald-950/30 text-emerald-400' :
                                                     log.proteinEst === 'med' ? 'bg-amber-950/30 text-amber-400' :
-                                                    'bg-slate-800 text-slate-500'
+                                                    'bg-white/10 text-white/35'
                                                 }`}>
                                                     {log.proteinEst === 'high' ? 'High' : log.proteinEst === 'med' ? 'Medium' : 'Low'}
                                                 </div>
@@ -284,7 +284,7 @@ export function DailyHistory() {
                                         {/* Food log */}
                                         {log && log.foodLog && log.foodLog.length > 0 && (
                                             <div>
-                                                <div className="flex items-center gap-2 text-xs text-slate-500 uppercase font-bold tracking-wider mb-2">
+                                                <div className="flex items-center gap-2 text-xs text-white/35 uppercase font-bold tracking-wider mb-2">
                                                     <Apple className="w-3.5 h-3.5" />
                                                     Food Log
                                                 </div>
@@ -311,14 +311,14 @@ export function DailyHistory() {
                                                         return (
                                                             <div
                                                                 key={i}
-                                                                className="flex items-center gap-2 p-2 bg-slate-950 rounded-lg"
+                                                                className="flex items-center gap-2 p-2 bg-black rounded-lg"
                                                             >
                                                                 <div className={getMealColor(food.mealType)}>
                                                                     {getMealIcon(food.mealType)}
                                                                 </div>
                                                                 <div className="flex-1">
-                                                                    <div className="text-sm text-slate-300">{food.item}</div>
-                                                                    <div className="flex items-center gap-2 text-xs text-slate-600">
+                                                                    <div className="text-sm text-white/70">{food.item}</div>
+                                                                    <div className="flex items-center gap-2 text-xs text-white/20">
                                                                         <span>{food.mealType}</span>
                                                                         {food.time && <span className="font-mono">{food.time}</span>}
                                                                     </div>
@@ -341,7 +341,7 @@ export function DailyHistory() {
             {daysToShow < 365 && (
                 <button
                     onClick={() => setDaysToShow(prev => Math.min(prev + 30, 365))}
-                    className="w-full p-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg text-slate-400 text-sm font-bold transition-colors"
+                    className="w-full p-3 bg-white/[0.06] hover:bg-white/10 border border-white/10 rounded-lg text-white/50 text-sm font-bold transition-colors"
                 >
                     Load More Days
                 </button>

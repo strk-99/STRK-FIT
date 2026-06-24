@@ -35,20 +35,20 @@ export function WeightTracker() {
     return (
         <div className="space-y-4">
             {/* Current Weight Display */}
-            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-xl p-5 border border-slate-800 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-xl p-5 border border-white/10 relative overflow-hidden">
                 {/* Background decoration */}
                 <div className="absolute top-0 right-0 opacity-5">
-                    <Scale className="w-32 h-32 text-cyan-400" />
+                    <Scale className="w-32 h-32 text-white" />
                 </div>
 
                 <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center gap-2">
-                            <Scale className="w-5 h-5 text-cyan-400" />
-                            <span className="text-sm font-bold text-slate-400 uppercase tracking-wider">Current Weight</span>
+                            <Scale className="w-5 h-5 text-white" />
+                            <span className="text-sm font-bold text-white/50 uppercase tracking-wider">Current Weight</span>
                         </div>
                         {profile && (
-                            <span className="text-xs text-slate-600">
+                            <span className="text-xs text-white/20">
                                 {Math.abs(profile.currentWeight - profile.targetWeight).toFixed(1)}kg to go
                             </span>
                         )}
@@ -58,12 +58,12 @@ export function WeightTracker() {
                         <span className="text-5xl font-black text-white">
                             {latest ? latest.weight : profile?.currentWeight || '--'}
                         </span>
-                        <span className="text-xl text-slate-500 font-medium">kg</span>
+                        <span className="text-xl text-white/35 font-medium">kg</span>
                     </div>
 
                     {/* Change indicator */}
                     {latest && previous && (
-                        <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-950 border border-slate-800">
+                        <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black border border-white/10">
                             {changeDirection === 'down' && (
                                 <>
                                     <TrendingDown className="w-4 h-4 text-emerald-400" />
@@ -82,11 +82,11 @@ export function WeightTracker() {
                             )}
                             {changeDirection === 'same' && (
                                 <>
-                                    <Minus className="w-4 h-4 text-slate-500" />
-                                    <span className="text-sm font-bold text-slate-500">No change</span>
+                                    <Minus className="w-4 h-4 text-white/35" />
+                                    <span className="text-sm font-bold text-white/35">No change</span>
                                 </>
                             )}
-                            <span className="text-xs text-slate-600">since last cycle</span>
+                            <span className="text-xs text-white/20">since last cycle</span>
                         </div>
                     )}
                 </div>
@@ -98,20 +98,20 @@ export function WeightTracker() {
                     onClick={() => setShowInput(true)}
                     className={`w-full p-4 rounded-xl border-2 transition-all ${
                         isDue
-                            ? 'bg-cyan-950/20 border-cyan-500/50 hover:bg-cyan-950/30 text-cyan-400'
-                            : 'bg-slate-900 border-slate-800 hover:bg-slate-800 text-slate-400'
+                            ? 'bg-white/[0.04] border-white/40 hover:bg-white/[0.06] text-white'
+                            : 'bg-white/[0.06] border-white/10 hover:bg-white/10 text-white/50'
                     }`}
                 >
                     <div className="text-center">
                         <p className="font-bold text-sm">
                             {isDue ? '✨ Time for check-in' : `Next check-in in ${10 - daysSinceLastLog} days`}
                         </p>
-                        <p className="text-xs text-slate-500 mt-1">Tap to log weight</p>
+                        <p className="text-xs text-white/35 mt-1">Tap to log weight</p>
                     </div>
                 </button>
             ) : (
-                <div className="bg-slate-900 p-4 rounded-xl border border-cyan-500/30 space-y-3 animate-fade-up">
-                    <p className="text-sm text-slate-400 text-center">
+                <div className="bg-white/[0.06] p-4 rounded-xl border border-white/20 space-y-3 animate-fade-up">
+                    <p className="text-sm text-white/50 text-center">
                         One data point. No judgement.
                     </p>
                     <div className="flex gap-2">
@@ -121,16 +121,16 @@ export function WeightTracker() {
                             value={newWeight}
                             onChange={(e) => setNewWeight(e.target.value)}
                             placeholder="97.5"
-                            className="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white text-center text-xl font-mono placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                            className="flex-1 bg-black border border-white/[0.15] rounded-lg px-4 py-3 text-white text-center text-xl font-mono placeholder:text-white/20 focus:outline-none focus:border-white/30"
                             autoFocus
                         />
-                        <span className="flex items-center text-slate-500 text-lg">kg</span>
+                        <span className="flex items-center text-white/35 text-lg">kg</span>
                     </div>
                     <div className="flex gap-2">
                         <button
                             onClick={handleSave}
                             disabled={!newWeight || parseFloat(newWeight) <= 0}
-                            className="flex-1 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-800 disabled:text-slate-600 text-white py-3 rounded-lg font-bold transition-colors"
+                            className="flex-1 bg-white/[0.12] hover:bg-cyan-500 disabled:bg-white/10 disabled:text-white/20 text-white py-3 rounded-lg font-bold transition-colors"
                         >
                             Save
                         </button>
@@ -139,13 +139,13 @@ export function WeightTracker() {
                                 setShowInput(false);
                                 setNewWeight('');
                             }}
-                            className="px-4 bg-slate-800 hover:bg-slate-700 text-slate-400 py-3 rounded-lg font-bold transition-colors"
+                            className="px-4 bg-white/10 hover:bg-white/[0.13] text-white/50 py-3 rounded-lg font-bold transition-colors"
                         >
                             Cancel
                         </button>
                     </div>
-                    <div className="pt-2 border-t border-slate-800">
-                        <p className="text-xs text-slate-600 text-center">
+                    <div className="pt-2 border-t border-white/10">
+                        <p className="text-xs text-white/20 text-center">
                             • Same scale • Morning time • Don't re-check today
                         </p>
                     </div>
@@ -155,7 +155,7 @@ export function WeightTracker() {
             {/* History */}
             {sortedHistory.length > 0 && (
                 <div className="space-y-2">
-                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1">Recent History</p>
+                    <p className="text-xs font-bold text-white/35 uppercase tracking-wider px-1">Recent History</p>
                     <div className="space-y-2 max-h-64 overflow-y-auto scrollbar-hide">
                         {sortedHistory.slice(0, 10).map((entry, i) => {
                             const prevEntry = sortedHistory[i + 1];
@@ -164,9 +164,9 @@ export function WeightTracker() {
                             return (
                                 <div
                                     key={`${entry.date}-${i}`}
-                                    className="group relative flex items-center justify-between p-3 bg-slate-900 hover:bg-slate-800/50 rounded-lg border border-slate-800 transition-colors"
+                                    className="group relative flex items-center justify-between p-3 bg-white/[0.06] hover:bg-white/[0.07] rounded-lg border border-white/10 transition-colors"
                                 >
-                                    <span className="text-sm text-slate-400">
+                                    <span className="text-sm text-white/50">
                                         {format(parseISO(entry.date), 'MMM d, yyyy')}
                                     </span>
                                     <div className="flex items-center gap-3">
@@ -174,7 +174,7 @@ export function WeightTracker() {
                                             <span className={`text-xs font-mono ${
                                                 entryChange < -0.1 ? 'text-emerald-400' :
                                                 entryChange > 0.1 ? 'text-amber-400' :
-                                                'text-slate-600'
+                                                'text-white/20'
                                             }`}>
                                                 {entryChange > 0 ? '+' : ''}{entryChange.toFixed(1)}
                                             </span>
@@ -182,7 +182,7 @@ export function WeightTracker() {
                                         <span className="text-white font-bold font-mono">{entry.weight} kg</span>
                                         <button
                                             onClick={() => removeWeightEntry(entry.date)}
-                                            className="opacity-0 group-hover:opacity-100 p-1.5 bg-slate-950/90 backdrop-blur-sm rounded-lg hover:bg-red-950 hover:text-red-400 text-slate-500 transition-all"
+                                            className="opacity-0 group-hover:opacity-100 p-1.5 bg-black/90 backdrop-blur-sm rounded-lg hover:bg-red-950 hover:text-red-400 text-white/35 transition-all"
                                             title="Delete entry"
                                         >
                                             <Trash2 className="w-3.5 h-3.5" />

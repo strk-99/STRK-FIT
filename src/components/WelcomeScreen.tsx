@@ -16,19 +16,19 @@ export function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
     return (
         <div
             onClick={onComplete}
-            className="min-h-screen bg-slate-950 flex items-center justify-center p-6 relative overflow-hidden cursor-pointer"
+            className="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden cursor-pointer"
         >
             {/* Animated background grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.03)_1px,transparent_1px)] bg-[size:30px_30px] animate-pulse"></div>
 
             {/* Glow effects */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.04] rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
 
             {/* Main card container */}
             <div className="relative max-w-md w-full">
                 {/* Futuristic card with glowing border */}
-                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-xl rounded-3xl p-4 border-2 border-cyan-500/30 shadow-2xl shadow-cyan-500/20 animate-fade-in">
+                <div className="relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 backdrop-blur-xl rounded-3xl p-4 border-2 border-white/20 shadow-2xl shadow-cyan-500/20 animate-fade-in">
                     {/* Corner accents */}
                     <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-cyan-400/50 rounded-tl-3xl"></div>
                     <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-cyan-400/50 rounded-tr-3xl"></div>

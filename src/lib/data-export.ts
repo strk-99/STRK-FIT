@@ -31,63 +31,89 @@ export async function exportUserDataToCSV(state: any) {
         csvContent += 'XP,' + (state.profile.xp || 0) + '\n';
     }
 
-    csvContent += '\n=== DAILY LOGS ===\n';
-    csvContent += 'Date,Workout Done,Protein Est,Steps,Water (glasses),Sleep (hours)\n';
+    // helper: escape a value for CSV (wrap in quotes if it contains comma/newline/quote)
+    const esc = (v: any): string => {
+        const s = String(v ?? '');
+        return s.includes(',') || s.includes('\n') || s.includes('"')
+            ? `"${s.replace(/"/g, '""')}"` : s;
+    };
 
-    if (state.logs) {
-        // Handle both array (if refactored) and object (current) formats
-        const logEntries = Array.isArray(state.logs)
+    // sorted log entries reused across sections
+    const sortedLogs: any[] = state.logs
+        ? (Array.isArray(state.logs)
             ? state.logs
-            : Object.entries(state.logs).map(([date, log]) => ({ date, ...log as any }));
+            : Object.entries(state.logs).map(([date, log]) => ({ date, ...log as any }))
+          ).sort((a: any, b: any) => a.date.localeCompare(b.date))
+        : [];
 
-        logEntries.sort((a: any, b: any) => a.date.localeCompare(b.date)).forEach((log: any) => {
-            csvContent += `${log.date},${log.workoutDone ? 'Yes' : 'No'},${log.proteinEst || 'med'},${log.steps || 0},${log.water || 0},${log.sleep || 0}\n`;
+    csvContent += '\n=== DAILY LOGS ===\n';
+    csvContent += 'Date,Workout Done,Protein Est,Steps,Water (glasses),Sleep (hours),Mood\n';
+    sortedLogs.forEach((log: any) => {
+        csvContent += `${log.date},${log.workoutDone ? 'Yes' : 'No'},${log.proteinEst || 'med'},${log.steps || 0},${log.water || 0},${log.sleep || 0},${log.mood || ''}\n`;
+    });
+
+    csvContent += '\n=== DAILY JOURNAL ===\n';
+    csvContent += 'Date,Journal Entry\n';
+    sortedLogs.forEach((log: any) => {
+        if (log.dailyJournal?.trim()) {
+            csvContent += `${log.date},${esc(log.dailyJournal.trim())}\n`;
+        }
+    });
+
+    csvContent += '\n=== HABITS LOG ===\n';
+    csvContent += 'Date,Habit,Done,Note\n';
+    if (state.habits && sortedLogs.length > 0) {
+        const habitMap: Record<string, string> = {};
+        (state.habits as any[]).forEach((h: any) => { habitMap[h.id] = `${h.emoji} ${h.name}`; });
+        sortedLogs.forEach((log: any) => {
+            if (log.habitLog) {
+                Object.entries(log.habitLog).forEach(([habitId, entry]: [string, any]) => {
+                    const done = typeof entry === 'boolean' ? entry : entry?.done;
+                    const note = typeof entry === 'object' ? (entry?.note || '') : '';
+                    if (done || note) {
+                        csvContent += `${log.date},${esc(habitMap[habitId] || habitId)},${done ? 'Yes' : 'No'},${esc(note)}\n`;
+                    }
+                });
+            }
         });
     }
+
+    csvContent += '\n=== TASKS ===\n';
+    csvContent += 'Date,Title,Priority,Completed,Completed At,Notes\n';
+    sortedLogs.forEach((log: any) => {
+        if (log.tasks && log.tasks.length > 0) {
+            log.tasks.forEach((task: any) => {
+                csvContent += `${log.date},${esc(task.title)},${task.priority || ''},${task.completed ? 'Yes' : 'No'},${task.completedAt || ''},${esc(task.notes || '')}\n`;
+            });
+        }
+    });
 
     csvContent += '\n=== EXERCISES ===\n';
     csvContent += 'Date,Exercise Name,Count,Completed\n';
-
-    if (state.logs) {
-        const logEntries = Array.isArray(state.logs)
-            ? state.logs
-            : Object.entries(state.logs).map(([date, log]) => ({ date, ...log as any }));
-
-        logEntries.sort((a: any, b: any) => a.date.localeCompare(b.date)).forEach((log: any) => {
-            if (log.exercises && log.exercises.length > 0) {
-                log.exercises.forEach((ex: any) => {
-                    csvContent += `${log.date},${ex.name || ''},${ex.count || ''},${ex.completed ? 'Yes' : 'No'}\n`;
-                });
-            }
-        });
-    }
+    sortedLogs.forEach((log: any) => {
+        if (log.exercises && log.exercises.length > 0) {
+            log.exercises.forEach((ex: any) => {
+                csvContent += `${log.date},${esc(ex.name)},${ex.count || ''},${ex.completed ? 'Yes' : 'No'}\n`;
+            });
+        }
+    });
 
     csvContent += '\n=== FOOD LOG ===\n';
     csvContent += 'Date,Meal Type,Food Item,Time\n';
-
-    if (state.logs) {
-        const logEntries = Array.isArray(state.logs)
-            ? state.logs
-            : Object.entries(state.logs).map(([date, log]) => ({ date, ...log as any }));
-
-        logEntries.sort((a: any, b: any) => a.date.localeCompare(b.date)).forEach((log: any) => {
-            if (log.foodLog && log.foodLog.length > 0) {
-                log.foodLog.forEach((food: any) => {
-                    csvContent += `${log.date},${food.mealType || ''},${food.item || ''},${food.time || ''}\n`;
-                });
-            }
-        });
-    }
+    sortedLogs.forEach((log: any) => {
+        if (log.foodLog && log.foodLog.length > 0) {
+            log.foodLog.forEach((food: any) => {
+                csvContent += `${log.date},${food.mealType || ''},${esc(food.item)},${food.time || ''}\n`;
+            });
+        }
+    });
 
     csvContent += '\n=== SHIFT HISTORY ===\n';
     csvContent += 'Date,Shift,Location\n';
-
     if (state.shiftHistory) {
-        // Check if shiftHistory is array or object map (it seems to be object map in UserProfile but let's be safe)
         const shiftEntries = Array.isArray(state.shiftHistory)
             ? state.shiftHistory
             : Object.entries(state.shiftHistory).map(([date, shift]) => ({ date, ...shift as any }));
-
         shiftEntries.sort((a: any, b: any) => a.date.localeCompare(b.date)).forEach((shift: any) => {
             csvContent += `${shift.date},${shift.shift || ''},${shift.location || ''}\n`;
         });
@@ -95,21 +121,40 @@ export async function exportUserDataToCSV(state: any) {
 
     csvContent += '\n=== WEIGHT HISTORY ===\n';
     csvContent += 'Date,Weight (kg)\n';
-
     if (state.weightHistory) {
-        const weightEntries = [...state.weightHistory];
-        weightEntries.sort((a: any, b: any) => a.date.localeCompare(b.date)).forEach((entry: any) => {
-            csvContent += `${entry.date},${entry.weight}\n`;
-        });
+        [...state.weightHistory]
+            .sort((a: any, b: any) => a.date.localeCompare(b.date))
+            .forEach((entry: any) => { csvContent += `${entry.date},${entry.weight}\n`; });
+    }
+
+    csvContent += '\n=== WEEKLY INTENTIONS ===\n';
+    csvContent += 'Week (Monday),Intention,Achieved\n';
+    if (state.weeklyIntentions) {
+        Object.values(state.weeklyIntentions as any)
+            .sort((a: any, b: any) => a.week.localeCompare(b.week))
+            .forEach((wi: any) => {
+                if (wi.intention?.trim()) {
+                    const achieved = wi.achieved === true ? 'Yes' : wi.achieved === false ? 'No' : 'Not set';
+                    csvContent += `${wi.week},${esc(wi.intention)},${achieved}\n`;
+                }
+            });
+    }
+
+    csvContent += '\n=== NOTES ===\n';
+    csvContent += 'Title,Created,Updated,Body\n';
+    if (state.notes) {
+        (state.notes as any[])
+            .sort((a: any, b: any) => a.createdAt.localeCompare(b.createdAt))
+            .forEach((note: any) => {
+                csvContent += `${esc(note.title)},${note.createdAt?.split('T')[0] || ''},${note.updatedAt?.split('T')[0] || ''},${esc(note.body)}\n`;
+            });
     }
 
     csvContent += '\n=== RESOURCES ===\n';
     csvContent += 'Title,Category,URL,Description\n';
-
     if (state.resources) {
-        state.resources.forEach((resource: any) => {
-            const desc = (resource.description || '').replace(/,/g, ';');
-            csvContent += `${resource.title || ''},${resource.category || ''},${resource.url || ''},${desc}\n`;
+        (state.resources as any[]).forEach((resource: any) => {
+            csvContent += `${esc(resource.title)},${resource.category || ''},${esc(resource.url)},${esc(resource.description)}\n`;
         });
     }
 

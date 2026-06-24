@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { WeightTracker } from './WeightTracker';
 import {
     User as UserIcon,
@@ -14,9 +14,10 @@ import {
     Settings,
     Bell,
     Calendar,
-    Pencil
+    Pencil,
+    Trophy,
 } from 'lucide-react';
-import { useStore } from '../store';
+import { useStore, type DailyLog } from '../store';
 import {
     calculateUserLevel,
     calculateIntegrityStreak,
@@ -39,6 +40,35 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
     const focusItems = getRightNowFocus(logs, shiftHistory);
     const snapshot = getWeeklySnapshot(logs, shiftHistory);
     const nextCheckIn = getNextCheckInDays(weightHistory);
+
+    const achievements = useMemo(() => {
+        const logEntries = Object.values(logs) as DailyLog[];
+        const totalDays = logEntries.length;
+        const workoutDays = logEntries.filter(l => l.workoutDone).length;
+        const journalDays = logEntries.filter(l => l.dailyJournal?.trim()).length;
+        const hydrationDays = logEntries.filter(l => (l.water || 0) >= 8).length;
+        const sleepDays = logEntries.filter(l => (l.sleep || 0) >= 7).length;
+        const foodDays = logEntries.reduce((sum, l) => sum + (l.foodLog?.length || 0), 0);
+        const habitPerfectDays = logEntries.filter(l =>
+            l.habitLog && Object.values(l.habitLog).length > 0 && Object.values(l.habitLog).every(Boolean)
+        ).length;
+
+        const list = [
+            { id: 'first_log',      emoji: '🗓️',  name: 'First Step',        desc: 'Logged your first day',              done: totalDays >= 1    },
+            { id: 'workout_10',     emoji: '💪',  name: 'Workout Warrior',    desc: '10 workout days logged',             done: workoutDays >= 10 },
+            { id: 'workout_30',     emoji: '🏋️',  name: 'Iron Will',          desc: '30 workout days logged',             done: workoutDays >= 30 },
+            { id: 'streak_7',       emoji: '🔥',  name: '7-Day Streak',       desc: '7 consecutive days logged',          done: currentStreak >= 7  },
+            { id: 'streak_30',      emoji: '👑',  name: 'Unstoppable',        desc: '30-day streak achieved',             done: bestStreak >= 30   },
+            { id: 'hydration_7',    emoji: '💧',  name: 'Hydration Hero',     desc: '8+ glasses on 7 different days',     done: hydrationDays >= 7 },
+            { id: 'sleep_10',       emoji: '😴',  name: 'Rest Master',        desc: '7+ hours sleep on 10 days',          done: sleepDays >= 10    },
+            { id: 'food_20',        emoji: '🥗',  name: 'Meal Tracker',       desc: '20+ food entries logged total',       done: foodDays >= 20     },
+            { id: 'journal_10',     emoji: '📓',  name: 'Journal Keeper',     desc: '10 days with journal entries',        done: journalDays >= 10  },
+            { id: 'habit_perfect',  emoji: '⭐',  name: 'Perfect Day',        desc: 'All habits completed in one day',    done: habitPerfectDays >= 1  },
+            { id: 'weight_logged',  emoji: '⚖️',  name: 'Data Driven',        desc: 'Logged first weight entry',          done: weightHistory.length >= 1 },
+            { id: 'weight_5',       emoji: '🎯',  name: 'Weight Journey',     desc: '5+ weight entries recorded',         done: weightHistory.length >= 5 },
+        ];
+        return list;
+    }, [logs, weightHistory, currentStreak, bestStreak]);
 
     const [showLevelTooltip, setShowLevelTooltip] = useState(false);
     const [showProfileForm, setShowProfileForm] = useState(!profile);
@@ -680,6 +710,39 @@ export function UserProfile({ onOpenSettings }: UserProfileProps = {}) {
                 <p className="text-sm text-slate-500 italic border-t border-slate-800/50 pt-3">
                     Still in the game.
                 </p>
+            </div>
+
+            {/* SECTION 8: ACHIEVEMENTS */}
+            <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-widest px-1">
+                    <Trophy className="w-4 h-4 text-amber-500" />
+                    Achievements
+                    <span className="ml-auto text-amber-400 font-bold">
+                        {achievements.filter(a => a.done).length}/{achievements.length}
+                    </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                    {achievements.map(a => (
+                        <div key={a.id}
+                            className={`p-3 rounded-xl border transition-all ${
+                                a.done
+                                    ? 'bg-amber-950/20 border-amber-700/40'
+                                    : 'bg-slate-900/40 border-slate-800/50 opacity-50'
+                            }`}>
+                            <div className="flex items-start gap-2">
+                                <span className={`text-xl leading-none ${!a.done && 'grayscale'}`}>{a.emoji}</span>
+                                <div className="flex-1 min-w-0">
+                                    <p className={`text-xs font-bold leading-tight ${a.done ? 'text-amber-300' : 'text-slate-500'}`}>
+                                        {a.name}
+                                    </p>
+                                    <p className="text-[10px] text-slate-600 leading-tight mt-0.5">{a.desc}</p>
+                                </div>
+                                {a.done && <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {/* USEFUL OPTIONS */}

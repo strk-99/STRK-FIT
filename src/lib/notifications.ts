@@ -374,6 +374,121 @@ export function sendStreakNotification(currentStreak: number): void {
     }
 }
 
+// ─── Task Reminder Scheduling ────────────────────────────────────────────────
+
+export interface TaskReminderConfig {
+    id: string;
+    title: string;
+    notes?: string;
+    reminderTime: string;          // HH:mm
+    reminderEnabled: boolean;
+    reminderRepeat: 'none' | 'daily' | 'weekdays' | 'custom';
+    reminderDays?: number[];       // 0=Sun … 6=Sat
+}
+
+/** Deterministic notification base-ID from a task UUID (range 100000–999999) */
+function taskBaseId(taskId: string): number {
+    const hex = taskId.replace(/-/g, '').slice(0, 7);
+    return (parseInt(hex, 16) % 900000) + 100000;
+}
+
+/** Cancel all notification slots for a task (up to 7 day-slots) */
+export async function cancelTaskReminder(taskId: string): Promise<void> {
+    if (!Capacitor.isNativePlatform()) return;
+    const base = taskBaseId(taskId);
+    try {
+        await LocalNotifications.cancel({
+            notifications: Array.from({ length: 7 }, (_, i) => ({ id: base + i }))
+        });
+    } catch (e) {
+        console.warn('cancelTaskReminder:', e);
+    }
+}
+
+/** Schedule local notification(s) for a task reminder */
+export async function scheduleTaskReminder(cfg: TaskReminderConfig): Promise<void> {
+    if (!cfg.reminderEnabled || !cfg.reminderTime) return;
+
+    // Always cancel previous slots first to avoid duplicates
+    await cancelTaskReminder(cfg.id);
+
+    const [hour, minute] = cfg.reminderTime.split(':').map(Number);
+    const base = taskBaseId(cfg.id);
+    const body = cfg.notes || 'Task reminder';
+
+    if (Capacitor.isNativePlatform()) {
+        const perm = await getNotificationPermission();
+        if (!perm.granted) {
+            await requestNotificationPermission();
+            const perm2 = await getNotificationPermission();
+            if (!perm2.granted) return;
+        }
+
+        if (cfg.reminderRepeat === 'none') {
+            // One-time – next occurrence of that time
+            const at = new Date();
+            at.setHours(hour, minute, 0, 0);
+            if (at <= new Date()) at.setDate(at.getDate() + 1);
+
+            await LocalNotifications.schedule({
+                notifications: [{
+                    id: base, title: cfg.title, body,
+                    schedule: { at, allowWhileIdle: true },
+                    channelId: 'default',
+                }]
+            });
+
+        } else if (cfg.reminderRepeat === 'daily') {
+            const at = new Date();
+            at.setHours(hour, minute, 0, 0);
+            if (at <= new Date()) at.setDate(at.getDate() + 1);
+
+            await LocalNotifications.schedule({
+                notifications: [{
+                    id: base, title: cfg.title, body,
+                    schedule: { at, every: 'day', allowWhileIdle: true },
+                    channelId: 'default',
+                }]
+            });
+
+        } else {
+            // weekdays = [1,2,3,4,5]  custom = user-picked days
+            const days = cfg.reminderRepeat === 'weekdays'
+                ? [1, 2, 3, 4, 5]
+                : (cfg.reminderDays ?? []);
+
+            if (days.length === 0) return;
+
+            // Capacitor weekday: 1=Sun, 2=Mon … 7=Sat  →  ours: 0=Sun … 6=Sat
+            await LocalNotifications.schedule({
+                notifications: days.map((day, i) => ({
+                    id: base + i,
+                    title: cfg.title,
+                    body,
+                    schedule: { on: { weekday: day + 1, hour, minute }, allowWhileIdle: true },
+                    channelId: 'default',
+                }))
+            });
+        }
+
+    } else {
+        // Web fallback – only fires while the tab is open
+        if (!('Notification' in window) || Notification.permission !== 'granted') {
+            await requestNotificationPermission();
+        }
+        const now = new Date();
+        const at = new Date();
+        at.setHours(hour, minute, 0, 0);
+        if (at <= now) at.setDate(at.getDate() + 1);
+
+        setTimeout(() => {
+            if (Notification.permission === 'granted') {
+                new Notification(cfg.title, { body, icon: '/icon-192.png' });
+            }
+        }, at.getTime() - now.getTime());
+    }
+}
+
 /**
  * Setup notification listeners
  */
